@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import LoginVue from '../components/auth/Login.vue'
+import RepassVue from '../components/auth/Repass.vue'
 import ShowListDocumentVue from '@/components/document/ShowListDocument.vue'
 import ConfigDocument from '@/components/document/ConfigDocument.vue'
 import EditDocument from '@/components/document/EditDocument.vue'
@@ -23,6 +24,11 @@ const routes = [
     path: '/login',
     name: 'login',
     component: LoginVue
+  },
+  {
+    path: '/repass',
+    name: 'repass',
+    component: RepassVue
   },
   {
     path: '/document',
