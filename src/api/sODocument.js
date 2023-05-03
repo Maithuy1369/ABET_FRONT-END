@@ -38,5 +38,20 @@ export const sODocumentAPI = {
         }
         return feeAjax(options)
     },
+    getDetailSODocument(id) {
+        let feeUserInfo = JSON.parse(localStorage.getItem('feeUserInfo'))
+        let options = {
+            method: 'GET',
+            'contentType': 'application/json',
+            data: {},
+            url: appConfigs.getAPIUrl(appConfigs.apiDomain.sODocument) + 'get-detail-so/'+id,
+            headers: {
+                'Accept': 'application/json',
+          'Content-type': 'application/json',
+                authorization: 'Bearer '+ feeUserInfo.token
+            }
+        }
+        return feeAjax(options)
+    }
     
 }

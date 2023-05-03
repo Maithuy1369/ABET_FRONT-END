@@ -1,12 +1,32 @@
 <template>
     <div id="app">
-        <router-view />
+        <div class="v-main">
+            <div class="part1">
+                <HeaderBar />
+            </div>
+            <div class="part2">
+                <div class="part21">
+                    <NavBar />
+                </div>
+                <div class="part22">
+                    <router-view />
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
 <script>
+// import Content from "@/components/home/Content.vue";
+import HeaderBar from "@/components/home/HeaderBar.vue";
+import NavBar from "@/components/home/NavBar.vue";
 import { userAPI } from "./api/user";
 export default {
+    components: {
+        HeaderBar,
+        NavBar,
+    },
+
     created() {
         if (!window.passWaitingRoom) {
             this.$router.push("/waiting-room");
