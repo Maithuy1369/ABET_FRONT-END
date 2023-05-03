@@ -2,15 +2,11 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import LoginVue from '../components/auth/Login.vue'
+import ConfigSo from '@/components/SO/ConfigSO.vue'
+import ListPIbySO from '@/components/document/ListPIbySO.vue'
+import CreateDocument from '@/components/document/CreateDocument.vue'
 import RepassVue from '../components/auth/Repass.vue'
-import ShowListDocumentVue from '@/components/document/ShowListDocument.vue'
-import ConfigDocument from '@/components/document/ConfigDocument.vue'
-import EditDocument from '@/components/document/EditDocument.vue'
-import AddSubject from '@/components/document/AddSubject.vue'
-import VueScheduler from '@/components/scheduler/VueScheduler.vue'
-import EditScheduler from '@/components/scheduler/EditScheduler.vue'
-import DocumentToDashboard from '@/components/dashboard/DocumentToDashboard.vue'
-import DashboardWorkspace from '@/components/dashboard/DashboardWorkspace.vue'
+import WaitingRoomVue from '@/components/WaitingRoom.vue'
 
 Vue.use(VueRouter)
 
@@ -21,6 +17,11 @@ const routes = [
     component: HomeView
   },
   {
+    path: '/waiting-room',
+    name: 'waitingRoom',
+    component: WaitingRoomVue
+  },
+  {
     path: '/login',
     name: 'login',
     component: LoginVue
@@ -29,46 +30,23 @@ const routes = [
     path: '/repass',
     name: 'repass',
     component: RepassVue
+  },{
+    path: '/SO/config',
+    name: 'configSO',
+    component: ConfigSo
   },
   {
-    path: '/document',
-    name: 'showListDocument',
-    component: ShowListDocumentVue
+    path: '/document/all-document-by-so/:id',
+    name: 'ListPIbySO',
+    component: ListPIbySO
   },
+
   {
-    path: '/document/config',
-    name: 'addDocument',
-    component: ConfigDocument
+    path: '/document/:id/create-document',
+    name: 'CreateDocument',
+    component: CreateDocument
   },
-  {
-    path: '/document/editDocument/:id',
-    name: 'editDocument',
-    component: EditDocument
-  },
-  {
-    path: '/dashboard/',
-    name: 'listDashboard',
-    component: DocumentToDashboard
-  },
-  {
-    path: '/dashboard/workspace/:id',
-    name: 'dashboardWorkspace',
-    component: DashboardWorkspace
-  }, {
-    path: '/document/config/addSubject',
-    name: 'addSubject',
-    component: AddSubject
-  },
-  {
-    path: '/scheduler',
-    name: 'MainScheduler',
-    component: VueScheduler
-  },
-  {
-    path: '/scheduler/editScheduler/:id',
-    name: 'EditScheduler',
-    component: EditScheduler
-  },
+  
 ]
 
 const router = new VueRouter({

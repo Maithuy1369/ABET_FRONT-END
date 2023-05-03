@@ -18,5 +18,17 @@ export const userAPI = {
         }
         return feeAjax(options)
         // return coreAPI.post('login', data)
+    },
+    getAllUserInfo() {
+        let options = {
+            method: 'GET',
+            crossDomain: true,
+            data: {
+                id:"all"
+            },
+            url: appConfigs.getAPIUrl(appConfigs.apiDomain.auth) + 'get-detail',
+            headers: {}
+        }
+        return feeAjax(options)
     }
 }
