@@ -85,8 +85,8 @@ export default {
             console.log(this.email, this.password);
             let res = await userAPI.login(this.userName, this.password);
             if (res.status == 200) {
-                this.$store.commit("user/setShowUser", res);
-                localStorage.feeUserInfo = JSON.stringify(res);
+                this.$store.commit("user/setShowUser", res.data);
+                localStorage.feeUserInfo = JSON.stringify(res.data);
                 this.$router.push("/");
             } else {
                 console.log("unAuthentication");

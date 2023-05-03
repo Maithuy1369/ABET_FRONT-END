@@ -6,7 +6,7 @@
                 <div class="input-field">
                     <p>Trường tương ứng với tên sinh viên(firstName):</p>
                     <v-text-field
-                        v-model="columnDefs[0].headerName"
+                        v-model="firstNameField"
                         type="text"
                         placeholder="name display"
                     ></v-text-field>
@@ -14,7 +14,15 @@
                 <div class="input-field">
                     <p>Trường tương ứng với tên sinh viên(lastName):</p>
                     <v-text-field
-                        v-model="columnDefs[0].headerName"
+                        v-model="lastNameField"
+                        type="text"
+                        placeholder="name display"
+                    ></v-text-field>
+                </div>
+                <div class="input-field">
+                    <p>Trường tương ứng với mã lớp:</p>
+                    <v-text-field
+                        v-model="classId"
                         type="text"
                         placeholder="name display"
                     ></v-text-field>
@@ -22,7 +30,7 @@
                 <div class="input-field">
                     <p>Tên báo cáo:</p>
                     <v-text-field
-                        v-model="columnDefs[0].headerName"
+                        v-model="documentName"
                         type="text"
                         placeholder="name display"
                     ></v-text-field>
@@ -30,7 +38,7 @@
                 <div class="input-field">
                     <p>Trường tương ứng với mã sinh viên:</p>
                     <v-text-field
-                        v-model="columnDefs[1].headerName"
+                        v-model="studentIdField"
                         type="text"
                         placeholder="id"
                     ></v-text-field>
@@ -77,6 +85,65 @@
                         </template>
                     </v-autocomplete>
                 </div>
+                <div class="input-field">
+                    <p>Assessor:</p>
+                    <v-autocomplete
+                        v-model="verifierId"
+                        :items="allUser"
+                        filled
+                        chips
+                        color="blue-grey lighten-2"
+                        label="Select"
+                        item-value="userName"
+                    >
+                        <template v-slot:selection="data">
+                            <v-chip
+                                v-bind="data.attrs"
+                                :input-value="data.selected"
+                                close
+                                @click="data.select"
+                                @click:close="remove(data.item)"
+                            >
+                                {{
+                                    data.item.firstName +
+                                    " " +
+                                    data.item.lastName
+                                }}
+                            </v-chip>
+                        </template>
+                        <template v-slot:item="data">
+                            <template>
+                                <v-list-item-content>
+                                    <v-list-item-title
+                                        v-html="
+                                            data.item.firstName +
+                                            ' ' +
+                                            data.item.lastName
+                                        "
+                                    ></v-list-item-title>
+                                </v-list-item-content>
+                            </template>
+                        </template>
+                    </v-autocomplete>
+                </div>
+            </div>
+            <div class="input-field">
+                <p>PI Field(Chọn nhiều trường):</p>
+                <v-autocomplete
+                    v-model="evaluateField"
+                    :items="allPIField"
+                    filled
+                    chips
+                    color="blue-grey lighten-2"
+                    label="Select"
+                    item-value="userName"
+                    multiple
+                >
+                </v-autocomplete>
+            </div>
+            <div style="width: 30%">
+                <p>Import danh sách dạng excel vào:</p>
+                <v-file-input id="file" v-model="file" @change="handleFile" />
             </div>
             <div style="display: flex; justify-content: center; margin: 30px">
                 <v-btn @click="createDocument"> submit </v-btn>
@@ -96,16 +163,35 @@
 import { read, utils } from "xlsx";
 import { AgGridVue } from "ag-grid-vue";
 import { documentAPI } from "@/api/document.js";
-
+import { sODocumentAPI } from "@/api/sODocument.js";
 export default {
-    created() {
+    async created() {
         this.allUser = this.$store.state.user.users;
+        let id = this.$route.params.id;
+        let res = await sODocumentAPI.getDetailSODocument(id);
+        console.log(res);
+        this.detailSODocument = res.data;
+        let soField =
+            this.detailSODocument.name[this.detailSODocument.name.length - 1];
+        let result = [];
+        for (let i = 1; i < 6; i++) {
+            result.push("PI." + soField + "." + i);
+        }
+        this.allPIField = result;
     },
     components: {
         AgGridVue,
     },
     data() {
         return {
+            allPIField: [],
+            evaluateField: [],
+            detailSODocument: {},
+            firstNameField: "",
+            lastNameField: "",
+            documentName: "",
+            studentIdField: "",
+            classId: "",
             allUser: [],
             columnDefs: [
                 {
@@ -117,9 +203,9 @@ export default {
                     field: "id",
                 },
             ],
-            sharePermissionValue: "",
             rawData: [],
             assesorId: [],
+            verifierId: "",
 
             file: undefined,
             fetchColumnDefs: [],
@@ -127,44 +213,26 @@ export default {
     },
     methods: {
         async createDocument() {
-            let userNameDisplayHeaderName = this.columnDefs[0].headerName;
-            let idHeaderName = this.columnDefs[1].headerName;
-            let classId = this.classId;
-            let subjectId = this.subjectId;
-            if (
-                this.fetchColumnDefs.filter(
-                    (col) =>
-                        col.field == userNameDisplayHeaderName ||
-                        col.field == idHeaderName
-                ).length == 2
-            ) {
-                this.fetchColumnDefs.map((col, idx) => {
-                    if (col.field == userNameDisplayHeaderName) {
-                        this.fetchColumnDefs.splice(idx, 1);
-                    }
+            let listStuden = [];
+            // let name = this.documentName;
+            this.rawData.map((a) => {
+                listStuden.push({
+                    classId: a[this.classId],
+                    firstName: a[this.firstNameField],
+                    lastname: a[this.lastNameField],
+                    studentId: a[this.studentIdField],
                 });
-                this.fetchColumnDefs.map((col, idx) => {
-                    if (col.field == idHeaderName) {
-                        this.fetchColumnDefs.splice(idx, 1);
-                    }
-                });
-                this.fetchColumnDefs = this.fetchColumnDefs.concat(
-                    this.columnDefs
-                );
-                this.rawData.map((data) => {
-                    let userNameValue = data[this.columnDefs[0].headerName];
-                    let idValue = data[this.columnDefs[1].headerName];
-                    delete data[this.columnDefs[0].headerName];
-                    delete data[this.columnDefs[1].headerName];
-                    data[this.columnDefs[0].field] = userNameValue;
-                    data[this.columnDefs[1].field] = idValue;
-                });
-                let res = await documentAPI.createDocument(
-                    this.fetchColumnDefs,
-                    this.rawData,
-                    classId,
-                    subjectId,
-                    this.sharePermission
+            });
+            let name = this.documentName;
+            for (let i of this.evaluateField) {
+                let res = documentAPI.createDocument(
+                    name,
+                    this.assesorId,
+                    this.verifierId,
+                    i,
+                    "abcd",
+                    listStuden,
+                    this.detailSODocument.Id
                 );
                 console.log(res);
             }
@@ -173,6 +241,7 @@ export default {
             let file = await e.arrayBuffer();
             const wb = read(file);
             const data = utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]]);
+            console.log(data);
             this.rawData = data;
             this.translateRawData();
         },
@@ -194,11 +263,19 @@ export default {
             });
             this.fetchColumnDefs = columnDefs;
         },
-        gotoAddSubject() {
-            this.$router.push("/document/config/addSubject");
-        },
     },
     computed: {
+        // allPIField() {
+        //     let soField =
+        //         this.detailSODocument.name[
+        //             this.detailSODocument.name.length - 1
+        //         ];
+        //     let result = [];
+        //     for (let i = 1; i < 6; i++) {
+        //         result.push("PI." + soField + "." + i);
+        //     }
+        //     return result;
+        // },
         // allUser() {
         //     return this.$store.state.user.users;
         // },
