@@ -11,6 +11,7 @@ const defaultState = {
     user: {},
     showUserInfo: false,
     allUserInfo: {},
+    users:[]
 };
 
 export default defaultState;

@@ -4,7 +4,23 @@
         <div class="config-document-config">
             <div class="config-document-config-field">
                 <div class="input-field">
-                    <p>Trường tương ứng với tên sinh viên:</p>
+                    <p>Trường tương ứng với tên sinh viên(firstName):</p>
+                    <v-text-field
+                        v-model="columnDefs[0].headerName"
+                        type="text"
+                        placeholder="name display"
+                    ></v-text-field>
+                </div>
+                <div class="input-field">
+                    <p>Trường tương ứng với tên sinh viên(lastName):</p>
+                    <v-text-field
+                        v-model="columnDefs[0].headerName"
+                        type="text"
+                        placeholder="name display"
+                    ></v-text-field>
+                </div>
+                <div class="input-field">
+                    <p>Tên báo cáo:</p>
                     <v-text-field
                         v-model="columnDefs[0].headerName"
                         type="text"
@@ -20,49 +36,46 @@
                     ></v-text-field>
                 </div>
                 <div class="input-field">
-                    <p>Mã lớp độc lập:</p>
-                    <v-text-field
-                        v-model="classId"
-                        type="text"
-                        placeholder="classID"
-                    ></v-text-field>
-                </div>
-            </div>
-            <div class="config-document-specific-field">
-                <div style="width: 40%">
-                    <p>Chọn môn học tương ứng:</p>
-                    <div style="display: flex; align-items: center">
-                        <v-autocomplete
-                            :items="subjectName"
-                            item-text="name"
-                            item-value="id"
-                            label="Subject"
-                            v-model="subjectId"
-                        >
-                        </v-autocomplete>
-                        <v-btn
-                            style="margin-left: 20px"
-                            @click="gotoAddSubject"
-                            :disabled="
-                                !(
-                                    this.$store.state.user.user.userInfo
-                                        .orgChart == 'superUser' ||
-                                    this.$store.state.user.user.userInfo
-                                        .orgChart == 'staff'
-                                )
-                            "
-                        >
-                            <v-icon>mdi-plus</v-icon>
-                        </v-btn>
-                    </div>
-                </div>
-                <div style="width: 40%">
-                    <p>Import danh sách dạng excel vào:</p>
-                    <v-file-input
-                        id="file"
-                        v-model="file"
-                        @change="handleFile"
-                    />
+                    <p>Assessor:</p>
+                    <v-autocomplete
+                        v-model="assesorId"
+                        :items="allUser"
+                        filled
+                        chips
+                        color="blue-grey lighten-2"
+                        label="Select"
+                        item-value="userName"
+                        multiple
+                    >
+                        <template v-slot:selection="data">
+                            <v-chip
+                                v-bind="data.attrs"
+                                :input-value="data.selected"
+                                close
+                                @click="data.select"
+                                @click:close="remove(data.item)"
+                            >
+                                {{
+                                    data.item.firstName +
+                                    " " +
+                                    data.item.lastName
+                                }}
+                            </v-chip>
+                        </template>
+                        <template v-slot:item="data">
+                            <template>
+                                <v-list-item-content>
+                                    <v-list-item-title
+                                        v-html="
+                                            data.item.firstName +
+                                            ' ' +
+                                            data.item.lastName
+                                        "
+                                    ></v-list-item-title>
+                                </v-list-item-content>
+                            </template>
+                        </template>
+                    </v-autocomplete>
                 </div>
             </div>
             <div style="display: flex; justify-content: center; margin: 30px">
@@ -83,32 +96,17 @@
 import { read, utils } from "xlsx";
 import { AgGridVue } from "ag-grid-vue";
 import { documentAPI } from "@/api/document.js";
-import { subjectAPI } from "@/api/subject.js";
 
 export default {
-    async created() {
-        if (
-            !(
-                this.$store.state.user.user.userInfo.orgChart == "superUser" ||
-                this.$store.state.user.user.userInfo.orgChart == "staff"
-            )
-        ) {
-            this.$router.push("/");
-        }
-
-        let res = await subjectAPI.getListSubject();
-        // console.log(res.data[0]);
-        // res.data.map (item => {
-        //     console.log(res.data.name[item])
-        // })
-        this.subjectName = res.data;
-        console.log(this.subjectName);
+    created() {
+        this.allUser = this.$store.state.user.users;
     },
     components: {
         AgGridVue,
     },
     data() {
         return {
+            allUser: [],
             columnDefs: [
                 {
                     headerName: "",
@@ -119,13 +117,12 @@ export default {
                     field: "id",
                 },
             ],
+            sharePermissionValue: "",
             rawData: [],
+            assesorId: [],
+
             file: undefined,
             fetchColumnDefs: [],
-
-            subjectName: null,
-            classId: null,
-            subjectId: null,
         };
     },
     methods: {
@@ -166,7 +163,8 @@ export default {
                     this.fetchColumnDefs,
                     this.rawData,
                     classId,
-                    subjectId
+                    subjectId,
+                    this.sharePermission
                 );
                 console.log(res);
             }
@@ -200,7 +198,11 @@ export default {
             this.$router.push("/document/config/addSubject");
         },
     },
-    computed: {},
+    computed: {
+        // allUser() {
+        //     return this.$store.state.user.users;
+        // },
+    },
 };
 </script>
 

@@ -4,75 +4,17 @@ import { feeAjax } from './feeAjax'
 
 // const coreAPI = new API(appConfigs.getAPIUrl(appConfigs.apiDomain.auth))
 export const documentAPI = {
-    createDocument(columnDefs, rawData, classId, subjectId) {
-        let data = {
-            columnDefs: columnDefs,
-            rawData: rawData,
-            classId: classId,
-            subjectId: subjectId,    
-        }
-        let feeUserInfo =JSON.parse(localStorage.getItem('feeUserInfo'))
-        console.log(feeUserInfo.access_token)
-        console.log(localStorage.getItem('feeUserInfo'))
-        let options = {
-            method: 'POST',
-            crossDomain: true,
-            'contentType': 'application/json',
-            data: JSON.stringify(data),
-            url: appConfigs.getAPIUrl(appConfigs.apiDomain.document) + 'create',
-            headers: {
-                authorization: 'Bearer '+ feeUserInfo.access_token
-            }
-        }
-        console.log(options)
-        return feeAjax(options)
-        // return coreAPI.post('login', data)
+    getAllPIBySOId(sOId) {
+        let feeUserInfo = JSON.parse(localStorage.getItem('feeUserInfo'))
         
-    },
-    getListDocument() {
-        let feeUserInfo =JSON.parse(localStorage.getItem('feeUserInfo'))
         let options = {
             method: 'GET',
             crossDomain: true,
             'contentType': 'application/json',
             data: {},
-            url: appConfigs.getAPIUrl(appConfigs.apiDomain.document) + 'getList',
+            url: appConfigs.getAPIUrl(appConfigs.apiDomain.document) + 'get-all-document-by-soId/' + sOId,
             headers: {
-                authorization: 'Bearer '+ feeUserInfo.access_token
-            }
-        }
-        return feeAjax(options)
-    },
-    detailDocument(id) {
-        let feeUserInfo =JSON.parse(localStorage.getItem('feeUserInfo'))
-        let options = {
-            method: 'GET',
-            crossDomain: true,
-            'contentType': 'application/json',
-            data: {},
-            url: appConfigs.getAPIUrl(appConfigs.apiDomain.document) + 'detail/' + id,
-            headers: {
-                authorization: 'Bearer '+ feeUserInfo.access_token
-            }
-        }
-        return feeAjax(options)  
-    },
-    editDocument(columnDefs, rawData, id) {
-        let data = {
-            columnDefs: columnDefs,
-            rawData: rawData    
-        }
-        let feeUserInfo =JSON.parse(localStorage.getItem('feeUserInfo'))
-        console.log(feeUserInfo.access_token)
-        console.log(localStorage.getItem('feeUserInfo'))
-        let options = {
-            method: 'PUT',
-            crossDomain: true,
-            'contentType': 'application/json',
-            data: JSON.stringify(data),
-            url: appConfigs.getAPIUrl(appConfigs.apiDomain.document) + 'document/edit/' + id,
-            headers: {
-                authorization: 'Bearer '+ feeUserInfo.access_token
+                authorization: 'Bearer '+ feeUserInfo.token
             }
         }
         console.log(options)

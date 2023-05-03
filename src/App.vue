@@ -5,13 +5,30 @@
 </template>
 
 <script>
+import { userAPI } from "./api/user";
 export default {
     created() {
+        if (!window.passWaitingRoom) {
+            this.$router.push("/waiting-room");
+        }
         if (localStorage.feeUserInfo) {
             this.$store.commit("user/setStoredUserInfo");
         } else {
             this.$router.push("/login");
         }
+        // this.getAllUser();
+        // console.log(allUser);
+    },
+    methods: {
+        getAllUser() {
+            let allUserRes = userAPI.getAllUserInfo().then((a) => {
+                console.log(a);
+            });
+
+            if (allUserRes.status == 200) {
+                this.$store.commit("user/setAllUserInfo", allUserRes.data);
+            }
+        },
     },
 };
 </script>
