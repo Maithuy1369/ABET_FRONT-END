@@ -1,5 +1,5 @@
 // import { util } from './plugins/util';
-const host = 'http://127.0.0.1:8000'
+const host = 'http://127.0.0.1:1234'
 var configs = {
     defaultAvatar: '/img/avatar_default.jpg',
     dataTypeIcon: {
@@ -15,6 +15,7 @@ var configs = {
     apiDomain: {
         auth: 'users-account/',
         document: 'document/',
+        sODocument: 'SO/'
         // subject: 'API/subject/',
         // scheduler: 'API/scheduler/'
     },
