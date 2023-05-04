@@ -1,5 +1,17 @@
 <template>
     <div>
+        <div>
+            <p>Danh sách mẫu phiếu:</p>
+            <div>
+                <div
+                    v-for="pi in allPIBySO"
+                    :key="pi.id"
+                    style="cursor: pointer"
+                >
+                    <div>Phiếu đánh giá {{ pi.evaluteField }}</div>
+                </div>
+            </div>
+        </div>
         <div v-if="isSuperUser">
             <v-btn @click="toConfigDocument">Tạo mới</v-btn>
         </div>
@@ -16,9 +28,17 @@ export default {
             return feeUserInfo.profile.userType == 0;
         },
     },
+    data() {
+        return {
+            allPIBySO: [],
+        };
+    },
     async created() {
         let id = this.$route.params.id;
         let res = await documentAPI.getAllPIBySOId(id);
+        if (res.status == 200) {
+            this.allPIBySO = res.data;
+        }
         console.log(res);
     },
     methods: {
@@ -27,9 +47,6 @@ export default {
                 "/document/" + this.$route.params.id + "/create-document"
             );
         },
-    },
-    data() {
-        return {};
     },
 };
 </script>

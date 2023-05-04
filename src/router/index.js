@@ -7,6 +7,7 @@ import ListPIbySO from '@/components/document/ListPIbySO.vue'
 import CreateDocument from '@/components/document/CreateDocument.vue'
 import RepassVue from '../components/auth/Repass.vue'
 import WaitingRoomVue from '@/components/WaitingRoom.vue'
+import DocumentWorkspace from '@/components/document/DocumentWorkspace.vue'
 
 Vue.use(VueRouter)
 
@@ -45,6 +46,12 @@ const routes = [
     path: '/document/:id/create-document',
     name: 'CreateDocument',
     component: CreateDocument
+  },
+  
+  {
+    path: '/document/:id/workspace',
+    name: 'documentWorkspace',
+    component: DocumentWorkspace
   },
   
 ]

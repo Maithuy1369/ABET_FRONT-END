@@ -8,7 +8,7 @@ export const sODocumentAPI = {
         let data = {
             name: name,
             description: description,
-            identifierId: identifier
+            identifierId: JSON.stringify(identifier)
         }
         let options = {
             method: 'POST',

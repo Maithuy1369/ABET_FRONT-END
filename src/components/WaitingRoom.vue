@@ -3,6 +3,7 @@
 </template>
 <script>
 import { userAPI } from "@/api/user";
+import { sODocumentAPI } from "@/api/sODocument";
 export default {
     async created() {
         this.lastPath = this.$router.history.router.history._startLocation;
@@ -10,6 +11,14 @@ export default {
 
         if (allUserRes.status == 200) {
             this.$store.commit("user/setAllUserInfo", allUserRes.data);
+        }
+        let allSODocumentRes = await sODocumentAPI.getAllSODocument();
+        console.log(allSODocumentRes);
+        if (allSODocumentRes.status == 200) {
+            this.$store.commit(
+                "sODocument/setAllSODocument",
+                allSODocumentRes.data
+            );
         }
         window.passWaitingRoom = true;
         this.directToNextPage();

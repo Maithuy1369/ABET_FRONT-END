@@ -2,11 +2,11 @@
     <div id="app">
         <div class="v-main">
             <div class="part1">
-                <HeaderBar />
+                <HeaderBar v-if="includeMenu" />
             </div>
             <div class="part2">
                 <div class="part21">
-                    <NavBar />
+                    <NavBar v-if="includeMenu" />
                 </div>
                 <div class="part22">
                     <router-view />
@@ -38,6 +38,17 @@ export default {
         }
         // this.getAllUser();
         // console.log(allUser);
+    },
+    computed: {
+        includeMenu() {
+            if (
+                this.$route.name == "waitingRoom" ||
+                this.$route.name == "login"
+            ) {
+                return false;
+            }
+            return true;
+        },
     },
     methods: {
         getAllUser() {
