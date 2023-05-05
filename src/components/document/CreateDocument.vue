@@ -164,6 +164,7 @@ import { read, utils } from "xlsx";
 import { AgGridVue } from "ag-grid-vue";
 import { documentAPI } from "@/api/document.js";
 import { sODocumentAPI } from "@/api/sODocument.js";
+
 export default {
     async created() {
         this.allUser = this.$store.state.user.users;

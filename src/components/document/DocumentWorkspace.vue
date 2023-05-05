@@ -1,47 +1,111 @@
 <template>
-    <div></div>
+    <div>
+        <ag-grid-vue
+            style="width: 90%; height: 900px; margin: 0 auto"
+            class="ag-theme-alpine"
+            :columnDefs="columnDefs"
+            :rowData="rawData"
+            :defaultColDef="defaultColDef"
+            v-if="agReady"
+        >
+        </ag-grid-vue>
+    </div>
 </template>
 <script>
 import { documentAPI } from "@/api/document";
+import { AgGridVue } from "ag-grid-vue";
+import "ag-grid-community/styles/ag-grid.css";
+import "ag-grid-community/styles/ag-theme-alpine.css";
+import "ag-grid-enterprise";
 export default {
+    components: {
+        AgGridVue,
+    },
+    methods: {},
     async created() {
         let id = this.$route.params.id;
         let res = await documentAPI.getDetailDocument(id);
-        console.log(res);
         if (res.status == 200) {
             this.detailDocumentOrigin = res.data;
+            let eluvationField = this.columnDefs.find((a) => a.isEluvation);
+            eluvationField.headerName = res.data.evaluateField;
+            res.data.data.map((a) => {
+                if (a.field != 0) {
+                    eluvationField.children.push({
+                        // field: a.field,
+                        headerName: a.field,
+                        children: [],
+                    });
+                    let value = JSON.parse(a.detail[0].value);
+
+                    for (let v of Object.keys(value)) {
+                        eluvationField.children[
+                            eluvationField.children.length - 1
+                        ].children.push({
+                            field: v,
+                            headerName: v,
+                        });
+                    }
+                    // a.detail = { ...a.detail, ...value };
+                    a.detail.map((b, i) => {
+                        let v = JSON.parse(b.value);
+                        a.detail[i] = { ...b, ...v };
+                    });
+                } else {
+                    let value = JSON.parse(a.detail[0].value);
+
+                    for (let v of Object.keys(value)) {
+                        eluvationField.children.push({
+                            field: v,
+                            headerName: v,
+                        });
+                    }
+                    // a.detail = { ...a.detail, ...value };
+                    a.detail.map((b, i) => {
+                        let v = JSON.parse(b.value);
+                        a.detail[i] = { ...b, ...v };
+                    });
+                }
+
+                this.rawData = [...this.rawData, ...a.detail];
+            });
+            this.agReady = true;
         }
     },
     data() {
         return {
+            agReady: false,
+            defaultColDef: {
+                resizable: true,
+            },
             columnDefs: [
+                {
+                    headerName: "Họ tên",
+                    children: [
+                        {
+                            field: "firstName",
+                            headerName: "Họ đệm",
+                        },
+                        {
+                            field: "lastName",
+                            headerName: "Tên",
+                        },
+                    ],
+                },
+
                 {
                     field: "studentId",
                     headerName: "MSV",
                 },
-                {
-                    field: "firstName",
-                    headerName: "Họ đệm",
-                    rowGroup: true,
-                },
-                {
-                    field: "lastName",
-                    headerName: "Tên",
-                },
+
                 {
                     field: "classId",
                     headerName: "Lớp",
                 },
                 {
-                    field: "eluvation",
-                    pivot: true,
-                },
-                {
-                    field: "field",
-                    pivot: true,
-                },
-                {
-                    field: "detailField",
+                    isEluvation: true,
+                    headerName: "eluvation",
+                    children: [],
                 },
             ],
             rawData: [],
@@ -50,3 +114,16 @@ export default {
     },
 };
 </script>
+<style>
+/* .ag-theme-alpine {
+    --ag-header-column-separator-display: block;
+    --ag-header-column-separator-height: 100%;
+    --ag-header-column-separator-width: 2px;
+    --ag-header-column-separator-color: purple;
+
+    --ag-header-column-resize-handle-display: block;
+    --ag-header-column-resize-handle-height: 25%;
+    --ag-header-column-resize-handle-width: 5px;
+    --ag-header-column-resize-handle-color: orange;
+} */
+</style>

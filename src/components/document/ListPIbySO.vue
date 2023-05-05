@@ -7,6 +7,11 @@
                     v-for="pi in allPIBySO"
                     :key="pi.id"
                     style="cursor: pointer"
+                    @click="
+                        () => {
+                            toDetailDocument(pi.id);
+                        }
+                    "
                 >
                     <div>Phiếu đánh giá {{ pi.evaluteField }}</div>
                 </div>
@@ -42,6 +47,9 @@ export default {
         console.log(res);
     },
     methods: {
+        toDetailDocument(id) {
+            this.$router.push("/document/" + id + "/workspace");
+        },
         toConfigDocument() {
             this.$router.push(
                 "/document/" + this.$route.params.id + "/create-document"
