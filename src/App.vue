@@ -28,7 +28,7 @@ export default {
     },
 
     created() {
-        if (!window.passWaitingRoom) {
+        if (!window.passWaitingRoom && this.includeMenu) {
             this.$router.push("/waiting-room");
         }
         if (localStorage.feeUserInfo) {
