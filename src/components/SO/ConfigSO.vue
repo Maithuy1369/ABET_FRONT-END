@@ -40,3 +40,7 @@ export default {
   },
 };
 </script>
+<style>
+.data-app {
+}
+</style>
