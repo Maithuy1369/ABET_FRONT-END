@@ -1,21 +1,18 @@
 <template>
   <div class="v-app-bar theme--light">
-    <header
-      class="d-flex align-items-center justify-space-around"
-      style="background-color: #90caf9"
-    >
-      <div class="p-1" style="width: 15%">
-        <img
+    <v-header class="d-flex">
+      <v-list-item>
+        <v-img
           src="@/assets/image/logo_haui.jpg"
-          style="width: 80px"
+          max-width="50"
           alt="logoHAUI"
         />
-      </div>
-      <div class="text-center text-white" style="width: 95%">
-        <h3><strong>Khoa Điện tử - HaUI</strong></h3>
-        <h4>Chương trình kiểm định theo chuẩn ABET</h4>
-      </div>
-    </header>
+        <v-spacer class="text-center justify-space-around text-white pt-1">
+          <h5><strong>Khoa Điện tử - HaUI</strong></h5>
+          <h6>Chương trình kiểm định theo chuẩn ABET</h6>
+        </v-spacer>
+      </v-list-item>
+    </v-header>
   </div>
 </template>
 
@@ -25,4 +22,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.v-app-bar {
+  background-color: #130686;
+}
+</style>

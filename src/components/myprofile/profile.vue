@@ -18,13 +18,7 @@
                 id="inputGroupFile04"
                 aria-describedby="inputGroupFileAddon04"
               />
-              <button
-                class="btn btn-primary btn-sm"
-                type="button"
-                id="inputGroupFileAddon04"
-              >
-                Tải ảnh lên
-              </button>
+              <v-btn @click="profile">Tải ảnh lên</v-btn>
             </div>
           </div>
         </div>

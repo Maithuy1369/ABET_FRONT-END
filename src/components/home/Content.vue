@@ -1,5 +1,5 @@
 <template>
-  <div class="v-content">noi dung trang chu se o day</div>
+  <div class="v-content w-screen h-screen flex"></div>
 </template>
 
 <script>
