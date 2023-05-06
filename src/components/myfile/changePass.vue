@@ -1,6 +1,6 @@
 <template>
   <div class="password">
-    <form class="mb-3">
+    <div class="mb-3">
       <div class="text-center text-primary">
         <h5>Thay đổi mật khẩu</h5>
       </div>
@@ -10,7 +10,7 @@
           >Mật khẩu cũ</label
         >
         <div class="col-sm-8">
-          <input type="password" class="form-control" id="inputPassword" />
+          <input type="password" class="form-control" v-model="password" />
         </div>
       </div>
       <div class="mb-3 row">
@@ -18,7 +18,7 @@
           >Mật khẩu mới</label
         >
         <div class="col-sm-8">
-          <input type="password" class="form-control" id="inputPassword" />
+          <input type="password" class="form-control" v-model="password" />
         </div>
       </div>
       <div class="mb-3 row">
@@ -26,14 +26,14 @@
           >Nhập lại mật khẩu</label
         >
         <div class="col-sm-8">
-          <input type="password" class="form-control" id="inputPassword" />
+          <input type="password" class="form-control" v-model="password" />
         </div>
       </div>
       <div class="d-grid gap-2 d-flex justify-content-center">
         <input class="btn btn-primary" type="submit" value="Xác nhận" />
         <input class="btn btn-danger" type="reset" value="Huỷ" />
       </div>
-    </form>
+    </div>
   </div>
 </template>
 
@@ -45,7 +45,7 @@ export default {
 
 <style>
 .password {
-  border: 1px solid blue;
+  border: 1px solid rgb(68, 68, 73);
   padding: 30px 10px;
   width: 50%;
   margin: 10% 25%;

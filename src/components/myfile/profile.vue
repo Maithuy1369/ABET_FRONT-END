@@ -1,7 +1,7 @@
 <template>
   <div class="information">
     <div class="row">
-      <div class="col-xl-4">
+      <div class="col-xl-3">
         <div class="card mb-4 mb-xl-0">
           <div class="card-header text-center">Ảnh đại diện</div>
           <div class="card-body text-center">
@@ -18,7 +18,7 @@
                 id="inputGroupFile04"
                 aria-describedby="inputGroupFileAddon04"
               />
-              <v-btn @click="profile">Tải ảnh lên</v-btn>
+              <!-- <v-btn @click="profile">Tải ảnh lên</v-btn> -->
             </div>
           </div>
         </div>
@@ -27,52 +27,52 @@
         <div class="card mb-4">
           <div class="card-header text-center">Thông tin</div>
           <div class="card-body">
-            <form>
+            <div>
               <div class="row gx-3 mb-3">
                 <div class="col-md-6">
                   <label class="small mb-1" for="inputFullname">Họ tên</label>
-                  <input class="form-control" id="inputFullname" type="text" />
+                  <input class="form-control" v-model="fullName" type="text" />
                 </div>
                 <div class="col-md-6">
                   <label class="small mb-1" for="inputBirthday"
                     >Ngày sinh</label
                   >
-                  <input class="form-control" id="inputBirthday" type="date" />
+                  <input class="form-control" v-model="birthDay" type="date" />
                 </div>
               </div>
               <div class="row gx-0 mb-3">
                 <label class="small mb-1" for="inputAddress">Địa chỉ</label>
-                <input class="form-control" id="inputAddress" type="text" />
+                <input class="form-control" v-model="address" type="text" />
               </div>
               <div class="row gx-3 mb-0">
                 <div class="col-md-6">
                   <label class="small mb-1" for="inputEmail">Email</label>
-                  <input class="form-control" id="inputEmail" type="email" />
+                  <input class="form-control" v-model="email" type="email" />
                 </div>
                 <div class="col-md-6">
                   <label class="small mb-1" for="inputNumber"
                     >Số điện thoại</label
                   >
-                  <input class="form-control" id="inputNumber" type="number" />
+                  <input class="form-control" v-model="numBer" type="text" />
                 </div>
               </div>
               <div class="row gx-3 mb-3">
                 <div class="col-md-6">
                   <label class="small mb-1" for="inputOrgName">Chức vụ</label>
-                  <input class="form-control" id="inputOrgName" type="text" />
+                  <input class="form-control" v-model="position" type="text" />
                 </div>
                 <div class="col-md-6">
                   <label class="small mb-1" for="inputLocation"
                     >Nơi công tác</label
                   >
-                  <input class="form-control" id="inputLocation" type="text" />
+                  <input class="form-control" v-model="workPlace" type="text" />
                 </div>
               </div>
               <div class="d-grid gap-2 d-flex justify-content-center">
                 <input class="btn btn-primary" type="submit" value="Xác nhận" />
                 <input class="btn btn-danger" type="reset" value="Huỷ" />
               </div>
-            </form>
+            </div>
           </div>
         </div>
       </div>

@@ -1,6 +1,6 @@
 <template>
   <div class="v-app-bar theme--light">
-    <v-header class="d-flex">
+    <div class="d-flex">
       <v-list-item>
         <v-img
           src="@/assets/image/logo_haui.jpg"
@@ -12,18 +12,18 @@
           <h6>Chương trình kiểm định theo chuẩn ABET</h6>
         </v-spacer>
       </v-list-item>
-    </v-header>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "HeaderBar",
+  name: "headerBar",
 };
 </script>
 
 <style>
 .v-app-bar {
-  background-color: #130686;
+  background-color: #0d0461;
 }
 </style>
