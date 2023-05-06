@@ -1,37 +1,37 @@
 <template>
   <div class="v-nav-bar">
     <div class="d-flex flex-column flex-shrink-0 p-3">
-      <div class="h-[50px] text-white flex items-center">
-        <h6 class="font-bold text-xl">HỆ THỐNG ĐIỆN TỬ</h6>
+      <div class="h-[55px] text-white flex items-center just-">
+        <h6>HỆ THỐNG ĐIỆN TỬ</h6>
       </div>
-      <hr />
       <!--[-->
-      <div class="title">
-        <router-link to="/homeView" class="text-white">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="24"
-            fill="currentColor"
-            class="bi bi-house"
-            viewBox="0 -1.5 16 24"
-          >
-            <path
-              d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5ZM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5 5 5Z"
-            />
-          </svg>
-          <span class="material-symbols-outlined"> Trang chủ </span>
-        </router-link>
+      <div class="title text-white" style="font-bold">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="currentColor"
+          class="bi bi-house"
+          viewBox="0 -1.5 16 24"
+        >
+          <path
+            d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5ZM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5 5 5Z"
+          />
+        </svg>
+
+        <span
+          class="material-symbols-outlined"
+          @click="HomeViewVue"
+          type="button"
+        >
+          Trang chủ
+        </span>
       </div>
-      <hr />
+
       <!-- PROFILE -->
-      <div class="group">
+      <div class="group mt-2">
         <section class="VPSidebarGroup text-white">
           <div class="title" style="font-bold">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="24"
               fill="currentColor"
               class="bi bi-person"
               viewBox="0 -1.5 16 24"
@@ -40,33 +40,33 @@
                 d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10Z"
               />
             </svg>
-            <span class="material-symbols-outlined"> Thông tin cá nhân</span>
+            <span class="material-symbols-outlined">Thông tin cá nhân</span>
           </div>
-          <div class="flex flex-col justify-between space-y-[30px]">
-            <router-link
-              to="/profile"
-              class="relative items-center w-full text-sm rounded-md transition duration-400 ease-in-out"
+          <div class="bt-list">
+            <v-btn
+              class="button"
+              variant="tonal"
+              v-if="isSuperUser"
+              @click="showprofile"
+              >Hồ sơ cá nhân</v-btn
             >
-              Hồ sơ cá nhân
-            </router-link>
+
             <div class="mx-auto mb-2"></div>
-            <router-link
-              to="/changePass"
-              class="relative items-center w-full text-sm rounded-md transition duration-400 ease-in-out"
+            <v-btn
+              class="button"
+              variant="tonal"
+              v-if="isSuperUser"
+              @click="changePass"
+              >Đổi mật khẩu</v-btn
             >
-              Đổi mật khẩu
-            </router-link>
           </div>
         </section>
       </div>
-      <hr />
       <!-- SO -->
-      <div class="group">
+      <div class="group mt-2">
         <section class="VPSidebarGroup text-white">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="24"
             fill="currentColor"
             class="bi bi-clipboard-check"
             viewBox="0 -1.5 16 24"
@@ -83,47 +83,98 @@
             />
           </svg>
           <span class="material-symbols-outlined"> Danh sách các SO</span>
-          <div
-            v-for="(value, key, index) in computedAllSODocument"
-            :key="index"
-          >
-            <p>{{ key }}</p>
+          <div class="bt-list">
+            <div class="row">
+              <v-btn v-if="isSuperUser" @click="configSODocument"
+                >Thêm mới</v-btn
+              >
+              <v-btn v-if="isSuperUser" @click="configSODocument">Xóa</v-btn>
+            </div>
+
             <div
-              v-for="(soo, I) in value"
-              :key="'detail' + I"
-              style="cursor: pointer"
-              @click="() => allDocumentBySO(soo.id)"
+              v-for="(value, key, index) in computedAllSODocument"
+              :key="index"
+              class="mb-1"
             >
-              - {{ soo.name }}
+              <span>Năm: {{ key }}</span>
+              <div
+                v-for="(soo, I) in value"
+                :key="'detail' + I"
+                style="cursor: pointer"
+                @click="() => allDocumentBySO(soo.id)"
+                class="bt-list"
+              >
+                {{ soo.name }}
+              </div>
             </div>
           </div>
-          <v-btn v-if="isSuperUser" @click="configSODocument">Tạo mới</v-btn>
+
           <!--] -->
         </section>
       </div>
-      <hr />
-      <div class="title text-white">
-        <span class="material-symbols-outlined"> Biểu đồ thống kê </span>
+      <!-- BIEU DO -->
+      <div class="group mt-2 text-white">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="currentColor"
+          class="bi bi-bar-chart-line"
+          viewBox="0 -1.5 16 24"
+        >
+          <path
+            d="M11 2a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v12h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h1V7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7h1V2zm1 12h2V2h-2v12zm-3 0V7H7v7h2zm-5 0v-3H2v3h2z"
+          />
+        </svg>
+        <span class="material-symbols-outlined" @click="chartSO" type="button">
+          Biểu đồ thống kê
+        </span>
       </div>
-      <hr />
-      <div class="group">
+      <!-- DANG XUAT -->
+      <div class="group mt-2 text-white">
         <!--[-->
-        <router-link to="/Logout" class="text-white">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="24"
-            fill="currentColor"
-            class="bi bi-power"
-            viewBox="0 -1.5 16 24"
-          >
-            <path d="M7.5 1v7h1V1h-1z" />
-            <path
-              d="M3 8.812a4.999 4.999 0 0 1 2.578-4.375l-.485-.874A6 6 0 1 0 11 3.616l-.501.865A5 5 0 1 1 3 8.812z"
-            />
-          </svg>
-          <span class="material-symbols-outlined"> Đăng xuất </span>
-        </router-link>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="currentColor"
+          class="bi bi-power"
+          viewBox="0 -1.5 16 24"
+        >
+          <path d="M7.5 1v7h1V1h-1z" />
+          <path
+            d="M3 8.812a4.999 4.999 0 0 1 2.578-4.375l-.485-.874A6 6 0 1 0 11 3.616l-.501.865A5 5 0 1 1 3 8.812z"
+          />
+        </svg>
+
+        <span
+          class="material-symbols-outlined"
+          @click="showDialog"
+          type="button"
+        >
+          Đăng xuất
+        </span>
+        <v-dialog
+          v-model="dialog"
+          width="500px"
+          :style="{
+            display: dialog ? 'block' : 'none',
+          }"
+        >
+          <v-card>
+            <v-card-title>
+              <span class="text-h5">Xác nhận thoát ?</span>
+            </v-card-title>
+            <v-card-text>
+              Bạn đã chắc chắn muốn rời khỏi hệ thống điện tử
+            </v-card-text>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="black" variant="elevated" @click="login">
+                Xác nhận
+              </v-btn>
+              <v-btn color="red" variant="elevated" @click="dialog = false">
+                Thoát
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
 
         <!--]-->
       </div>
@@ -145,10 +196,26 @@ export default {
     allDocumentBySO(id) {
       this.$router.push("/document/all-document-by-so/" + id);
     },
+    showprofile() {
+      this.$router.push("/profile");
+    },
+    changePass() {
+      this.$router.push("/changePass");
+    },
+    showDialog() {
+      this.dialog = true;
+    },
+    login() {
+      this.$router.push("/login");
+    },
+    chartSO() {
+      this.$router.push("/chart");
+    },
   },
   data() {
     return {
       allSODocument: [],
+      dialog: false,
     };
   },
   computed: {
@@ -172,7 +239,7 @@ export default {
 
 <style>
 .v-nav-bar {
-  width: 200;
+  height: calc((100%-59px - 0px) - 0px);
   background-color: #0d0d24;
 }
 
@@ -180,5 +247,21 @@ export default {
   font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 48;
   font-family: "Times New Roman", Times, serif;
   font-size: 20px;
+  color: #ffffff;
+}
+.button {
+  background-color: #323275;
+}
+.button:hover {
+  background-color: #4b4b92;
+}
+.bi {
+  margin-right: 5px;
+  width: 30px;
+  height: 30px;
+  color: #ffffff;
+}
+.bt-list {
+  margin-left: 25px;
 }
 </style>
