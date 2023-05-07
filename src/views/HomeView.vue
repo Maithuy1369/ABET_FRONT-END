@@ -21,35 +21,46 @@ export default {
 
 <style>
 .v-main {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
+  display: block;
+  /* flex-direction: column;
+  flex-wrap: wrap; */
   justify-content: center;
   margin: 0px;
-  padding: 0px;
+  padding-top: 59px;
+  min-height: 100%;
+  box-sizing: border-box;
 }
 .part1 {
-  height: 10%;
   width: 100%;
+  position: fixed;
+  top: 0;
+  min-height: 50px;
+  margin-bottom: 0;
 }
-.part2 {
+/* .part2 {
   display: flex;
   flex-direction: row;
   width: 100%;
   height: 90%;
-}
+} */
 .part21 {
   height: 100%;
-  width: 20%;
+  width: 230px;
   background-color: gray-200;
+  box-sizing: border-box;
+  display: block;
+  margin-top: 2px;
+  position: fixed;
 }
 .part22 {
   width: 100%;
-  width: -moz-available; /* WebKit-based browsers will ignore this. */
-  width: -webkit-fill-available; /* Mozilla-based browsers will ignore this. */
-  width: fill-available;
-
-  background-color: gray-400;
+  /* width: -webkit-fill-available; Mozilla-based browsers will ignore this. */
+  left: 0;
+  position: relative;
+  margin-left: 230px;
+  min-height: 100%;
+  box-sizing: border-box;
+  display: block;
 }
 .v-app-bar {
   height: 100%;

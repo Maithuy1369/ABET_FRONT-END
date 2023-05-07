@@ -4,14 +4,14 @@
       <div class="part1">
         <HeaderBar v-if="includeMenu" />
       </div>
-      <div class="part2">
-        <div class="part21">
-          <NavBar v-if="includeMenu" />
-        </div>
-        <div class="part22">
-          <router-view />
-        </div>
+      <!-- <div class="part2"> -->
+      <div class="part21">
+        <NavBar v-if="includeMenu" />
       </div>
+      <div class="part22">
+        <router-view />
+      </div>
+      <!-- </div> -->
     </div>
   </div>
 </template>

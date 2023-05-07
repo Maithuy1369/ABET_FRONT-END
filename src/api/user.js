@@ -30,5 +30,17 @@ export const userAPI = {
             headers: {}
         }
         return feeAjax(options)
+    },
+    updateUserInfo(data){
+        
+        let options = {
+            method: 'POST',
+            crossDomain: true,
+            data: data,
+            
+            url: appConfigs.getAPIUrl(appConfigs.apiDomain.auth) + 'update',
+            headers: {}
+        }
+        return feeAjax(options)
     }
 }

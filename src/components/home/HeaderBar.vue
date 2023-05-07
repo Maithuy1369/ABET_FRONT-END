@@ -1,6 +1,6 @@
 <template>
   <div class="v-app-bar theme--light">
-    <div class="d-flex">
+    <div>
       <v-list-item>
         <v-img
           src="@/assets/image/logo_haui.jpg"
@@ -25,5 +25,6 @@ export default {
 <style>
 .v-app-bar {
   background-color: #0d0461;
+  /* position: fixed; */
 }
 </style>

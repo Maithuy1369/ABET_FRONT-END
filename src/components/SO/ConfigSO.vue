@@ -1,10 +1,25 @@
 <template>
-  <div data-app>
-    <div style="width: 50%">
-      <v-autocomplete v-model="name" :items="soNameOptions"> </v-autocomplete>
-      <v-textarea v-model="description"></v-textarea>
+  <div class="part22-card card container-fluid">
+    <div data-app>
+      <div class="title">
+        <span> DANH SÁCH CÁC SO</span>
+      </div>
+
+      <div class="title-1" style="width: 50%">
+        <v-autocomplete
+          label="Lựa chọn SO"
+          v-model="name"
+          :items="soNameOptions"
+        >
+        </v-autocomplete>
+        <v-textarea label="Mô tả" v-model="description"></v-textarea>
+      </div>
+      <div classId="d-grid justify-space-center ">
+        <v-btn @click="createSO">Xác nhận</v-btn>
+        <v-btn @click="createSO">Xóa</v-btn>
+        <!-- CHỖ NÀY BẠN THÊM PHẦN XÓA GIÚP T -->
+      </div>
     </div>
-    <v-btn @click="createSO">submit</v-btn>
   </div>
 </template>
 <script>
@@ -41,6 +56,32 @@ export default {
 };
 </script>
 <style>
-.data-app {
+.title {
+  margin: 0 20px 8px;
+  border-bottom: 1px solid #d9d9d9;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 20px;
+  font-weight: 400;
+  color: #0355b3;
+}
+.title-1 {
+  margin: 0 20px 15px;
+  padding: 30px;
+}
+.part22-card {
+  position: relative;
+  margin-left: 60px;
+  margin-top: 20px;
+  margin-right: auto;
+  margin-bottom: 20px;
+  padding-top: 30px;
+  padding-left: 25px;
+  padding-right: 50px;
+  padding-bottom: 25px;
+  box-sizing: border-box;
+  display: block;
+  border-top-color: blue;
+  border-top: 3px solid #2980e4;
+  border-width: 2;
 }
 </style>
