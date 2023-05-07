@@ -5,7 +5,7 @@
         <h6>HỆ THỐNG ĐIỆN TỬ</h6>
       </div>
       <!--[-->
-      <div class="title text-white" style="font-bold">
+      <div>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="currentColor"
@@ -17,48 +17,45 @@
           />
         </svg>
 
-        <span
-          class="material-symbols-outlined"
-          @click="HomeViewVue"
-          type="button"
-        >
-          Trang chủ
-        </span>
+        <span class="material-symbols-outlined" type="button"> Trang chủ </span>
       </div>
 
       <!-- PROFILE -->
       <div class="group mt-2">
         <section class="VPSidebarGroup text-white">
-          <div class="title" style="font-bold">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="currentColor"
-              class="bi bi-person"
-              viewBox="0 -1.5 16 24"
-            >
-              <path
-                d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10Z"
-              />
-            </svg>
-            <span class="material-symbols-outlined">Thông tin cá nhân</span>
-          </div>
-          <div class="bt-list">
-            <v-btn
-              class="button"
-              variant="tonal"
-              v-if="isSuperUser"
-              @click="showprofile"
-              >Hồ sơ cá nhân</v-btn
-            >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor"
+            class="bi bi-person"
+            viewBox="0 -1.5 16 24"
+          >
+            <path
+              d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10Z"
+            />
+          </svg>
+          <span class="material-symbols-outlined">Thông tin cá nhân</span>
 
-            <div class="mx-auto mb-2"></div>
-            <v-btn
-              class="button"
-              variant="tonal"
-              v-if="isSuperUser"
-              @click="changePass"
-              >Đổi mật khẩu</v-btn
-            >
+          <div class="bt-list">
+            <div>
+              <span
+                class="material-symbols-outlined-1 mb-2"
+                variant="tonal"
+                v-if="isSuperUser"
+                @click="showprofile"
+                type="button"
+                >Hồ sơ cá nhân
+              </span>
+            </div>
+            <div>
+              <span
+                class="material-symbols-outlined-1 mb-2"
+                variant="tonal"
+                v-if="isSuperUser"
+                @click="changePass"
+                type="button"
+                >Đổi mật khẩu</span
+              >
+            </div>
           </div>
         </section>
       </div>
@@ -82,15 +79,14 @@
               d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"
             />
           </svg>
-          <span class="material-symbols-outlined"> Danh sách các SO</span>
+          <span
+            class="material-symbols-outlined"
+            @click="configSO"
+            type="button"
+          >
+            Danh sách các SO</span
+          >
           <div class="bt-list">
-            <div class="row">
-              <v-btn v-if="isSuperUser" @click="configSODocument"
-                >Thêm mới</v-btn
-              >
-              <v-btn v-if="isSuperUser" @click="configSODocument">Xóa</v-btn>
-            </div>
-
             <div
               v-for="(value, key, index) in computedAllSODocument"
               :key="index"
@@ -190,6 +186,9 @@ export default {
     this.allSODocument = this.$store.state.sODocument.allSODocument;
   },
   methods: {
+    configSO() {
+      this.$router.push("/SO/config");
+    },
     configSODocument() {
       this.$router.push("/SO/config");
     },
@@ -241,12 +240,22 @@ export default {
 .v-nav-bar {
   height: calc((100%-59px - 0px) - 0px);
   background-color: #0d0d24;
+  position: fixed;
+  table-layout: fixed;
+  display: table;
+  box-sizing: border-box;
 }
 
 .material-symbols-outlined {
   font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 48;
   font-family: "Times New Roman", Times, serif;
   font-size: 20px;
+  color: #ffffff;
+}
+.material-symbols-outlined-1 {
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 48;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 18px;
   color: #ffffff;
 }
 .button {
@@ -262,6 +271,6 @@ export default {
   color: #ffffff;
 }
 .bt-list {
-  margin-left: 25px;
+  margin-left: 30px;
 }
 </style>
