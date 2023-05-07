@@ -10,7 +10,6 @@ import WaitingRoomVue from '@/components/WaitingRoom.vue'
 import DocumentWorkspace from '@/components/document/DocumentWorkspace.vue'
 import profileVue from '@/components/myfile/profile.vue'
 import changePassVue from '@/components/myfile/changePass.vue'
-import LogoutVue from '@/components/auth/Logout.vue'
 import chartSOVue from '@/components/SO/chartSO.vue'
 
 Vue.use(VueRouter)
@@ -46,11 +45,7 @@ const routes = [
     name: 'changePass',
     component: changePassVue
   },
-  {
-    path: '/logout',
-    name: 'logout',
-    component: LogoutVue
-  },
+
   {
     path: '/chart',
     name: 'chart',
