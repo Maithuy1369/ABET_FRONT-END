@@ -54,17 +54,19 @@
               </span>
             </div>
           </div>
-          <div class="alternative-option mt-4">
-            <!-- You don't have an account? <span @click="moveToRegister">Register</span> -->
-          </div>
+          <!-- <div class="alternative-option mt-4">
+            You don't have an account? <span @click="moveToRegister">Register</span> 
+          </div> -->
           <div class="row">
-            <button
+            <v-btn
               type="submit"
               class="mt-1 btn-per text-white front-bold"
               id="login_button"
+              color="#2980e4"
+              size="x-large"
             >
               Đăng nhập
-            </button>
+            </v-btn>
           </div>
           <div
             class="alert alert-warning alert-dismissible fade show mt-5 d-none"
@@ -157,7 +159,6 @@ export default {
 .container .row input {
   padding: 5px;
   margin-bottom: 15px;
-  margin-top: 15px;
   font-size: 1rem;
   letter-spacing: 0.062rem;
   border: 1px solid #ccc;
@@ -182,11 +183,10 @@ export default {
   margin-bottom: 5px;
   margin-top: 5px;
 }
-form button {
+.v-btn {
   float: center;
   padding: 10px;
   margin-bottom: 10px;
-  margin-top: 10px;
   background-color: #007bff;
   color: #fff;
   border: none;
@@ -195,7 +195,7 @@ form button {
   justify-content: center;
 }
 
-form button:hover {
+.v-btn:hover {
   background-color: #acacf2;
 
   /* background-color: #e7f0f6; */

@@ -11,7 +11,7 @@ import DocumentWorkspace from '@/components/document/DocumentWorkspace.vue'
 import profileVue from '@/components/myfile/profile.vue'
 import changePassVue from '@/components/myfile/changePass.vue'
 import chartSOVue from '@/components/SO/chartSO.vue'
-
+import homePage from '@/components/home/homePage.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -19,6 +19,11 @@ const routes = [
     path: '/',
     name: 'home',
     component: HomeView
+  },
+  {
+    path: '/homePage',
+    name: 'homePage',
+    component: homePage
   },
   {
     path: '/waiting-room',

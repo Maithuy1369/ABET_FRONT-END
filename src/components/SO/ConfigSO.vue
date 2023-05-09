@@ -12,12 +12,18 @@
           :items="soNameOptions"
         >
         </v-autocomplete>
-        <v-textarea label="Mô tả" v-model="description"></v-textarea>
+        <!-- <v-textarea label="Mô tả" v-model="description"></v-textarea> -->
       </div>
       <div classId="d-grid justify-space-center ">
-        <v-btn @click="createSO">Xác nhận</v-btn>
-        <v-btn @click="createSO">Xóa</v-btn>
-        <!-- CHỖ NÀY BẠN THÊM PHẦN XÓA GIÚP T -->
+        <v-btn
+          class="btn text-white"
+          type="submit"
+          color="#2980e4"
+          @click="createSO"
+          rounded="lg"
+          size="x-large"
+          >XÁC NHẬN</v-btn
+        >
       </div>
     </div>
   </div>
@@ -83,5 +89,6 @@ export default {
   border-top-color: blue;
   border-top: 3px solid #2980e4;
   border-width: 2;
+  width: -webkit-fill-available;
 }
 </style>

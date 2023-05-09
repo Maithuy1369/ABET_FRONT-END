@@ -1,11 +1,12 @@
 <template>
-  <div class="v-nav-bar">
+  <div class="v-nav-bar text-white">
     <div class="d-flex flex-column flex-shrink-0 p-3">
       <div class="h-[55px] text-white flex items-center just-">
-        <h6>HỆ THỐNG ĐIỆN TỬ</h6>
+        <span>HỆ THỐNG ĐIỆN TỬ</span>
       </div>
+      <hr class="text-white" />
       <!--[-->
-      <div>
+      <div class="group1">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="currentColor"
@@ -17,7 +18,9 @@
           />
         </svg>
 
-        <span class="material-symbols-outlined" type="button"> Trang chủ </span>
+        <span class="material-symbols-outlined" @click="homePage" type="button">
+          Trang chủ
+        </span>
       </div>
 
       <!-- PROFILE -->
@@ -36,9 +39,9 @@
           <span class="material-symbols-outlined">Thông tin cá nhân</span>
 
           <div class="bt-list">
-            <div>
+            <div class="group1">
               <span
-                class="material-symbols-outlined-1 mb-2"
+                class="material-symbols-outlined-1 mb-1"
                 variant="tonal"
                 v-if="isSuperUser"
                 @click="showprofile"
@@ -46,7 +49,8 @@
                 >Hồ sơ cá nhân
               </span>
             </div>
-            <div>
+
+            <div class="group1">
               <span
                 class="material-symbols-outlined-1 mb-2"
                 variant="tonal"
@@ -62,30 +66,32 @@
       <!-- SO -->
       <div class="group mt-2">
         <section class="VPSidebarGroup text-white">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="currentColor"
-            class="bi bi-clipboard-check"
-            viewBox="0 -1.5 16 24"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z"
-            />
-            <path
-              d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"
-            />
-            <path
-              d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"
-            />
-          </svg>
-          <span
-            class="material-symbols-outlined"
-            @click="configSO"
-            type="button"
-          >
-            Danh sách các SO</span
-          >
+          <div class="group1">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="currentColor"
+              class="bi bi-clipboard-check"
+              viewBox="0 -1.5 16 24"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z"
+              />
+              <path
+                d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"
+              />
+              <path
+                d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"
+              />
+            </svg>
+            <span
+              class="material-symbols-outlined"
+              @click="configSO"
+              type="button"
+            >
+              Danh sách các SO</span
+            >
+          </div>
           <div class="bt-list">
             <div
               v-for="(value, key, index) in computedAllSODocument"
@@ -98,7 +104,7 @@
                 :key="'detail' + I"
                 style="cursor: pointer"
                 @click="() => allDocumentBySO(soo.id)"
-                class="bt-list"
+                class="bt-list group1"
               >
                 {{ soo.name }}
               </div>
@@ -109,7 +115,7 @@
         </section>
       </div>
       <!-- BIEU DO -->
-      <div class="group mt-2 text-white">
+      <div class="group1 mt-2 text-white">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="currentColor"
@@ -125,7 +131,7 @@
         </span>
       </div>
       <!-- DANG XUAT -->
-      <div class="group mt-2 text-white">
+      <div class="group1 mt-2 text-white">
         <!--[-->
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -146,7 +152,7 @@
         >
           Đăng xuất
         </span>
-        <v-dialog
+        <!-- <v-dialog
           v-model="dialog"
           width="500px"
           :style="{
@@ -170,7 +176,7 @@
               </v-btn>
             </v-card-actions>
           </v-card>
-        </v-dialog>
+        </v-dialog> -->
 
         <!--]-->
       </div>
@@ -186,6 +192,9 @@ export default {
     this.allSODocument = this.$store.state.sODocument.allSODocument;
   },
   methods: {
+    homePage() {
+      this.$router.push("/homePage");
+    },
     configSO() {
       this.$router.push("/SO/config");
     },
@@ -244,18 +253,16 @@ export default {
   table-layout: fixed;
   display: table;
   box-sizing: border-box;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 20px;
 }
 
 .material-symbols-outlined {
   font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 48;
-  font-family: "Times New Roman", Times, serif;
-  font-size: 20px;
   color: #ffffff;
 }
 .material-symbols-outlined-1 {
   font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 48;
-  font-family: "Times New Roman", Times, serif;
-  font-size: 18px;
   color: #ffffff;
 }
 .button {
@@ -271,6 +278,15 @@ export default {
   color: #ffffff;
 }
 .bt-list {
-  margin-left: 30px;
+  margin-left: 36px;
+}
+.group1:hover {
+  cursor: pointer;
+  pointer-events: auto;
+  box-sizing: inherit;
+  border-style: solid;
+  background-color: #ac7524;
+  position: relative;
+  border-radius: 5px;
 }
 </style>
