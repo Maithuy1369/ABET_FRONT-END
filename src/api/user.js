@@ -32,14 +32,16 @@ export const userAPI = {
         return feeAjax(options)
     },
     updateUserInfo(data){
-        
+        let feeUserInfo = JSON.parse(localStorage.getItem('feeUserInfo'))
         let options = {
             method: 'POST',
             crossDomain: true,
             data: data,
             
             url: appConfigs.getAPIUrl(appConfigs.apiDomain.auth) + 'update',
-            headers: {}
+            headers: {
+                authorization: 'Bearer '+ feeUserInfo.token
+            }
         }
         return feeAjax(options)
     }
