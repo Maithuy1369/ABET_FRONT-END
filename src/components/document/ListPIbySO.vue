@@ -20,7 +20,28 @@
       </div>
     </div>
     <div class="btn" v-if="isSuperUser">
-      <v-btn @click="toConfigDocument">Thêm mẫu phiếu</v-btn>
+      <v-btn
+        class="btn text-white"
+        type="submit"
+        color="#2980e4"
+        @click="toConfigDocument"
+        rounded="lg"
+        size="x-large"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          fill="currentColor"
+          class="bi bi-plus"
+          viewBox="0 0 16 16"
+        >
+          <path
+            d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"
+          />
+        </svg>
+        Thêm mẫu phiếu</v-btn
+      >
     </div>
   </div>
 </template>
@@ -76,6 +97,7 @@ export default {
   border-top-color: blue;
   border-top: 3px solid #2980e4;
   border-width: 2;
+  width: -webkit-fill-available;
 }
 .title {
   margin: 0 20px 8px;
@@ -87,7 +109,7 @@ export default {
   color: #0355b3;
 }
 .btn {
-  margin-left: 50px;
   font-family: "Times New Roman", Times, serif;
+  font-size: 18px;
 }
 </style>

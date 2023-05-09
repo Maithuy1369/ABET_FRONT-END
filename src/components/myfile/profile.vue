@@ -90,12 +90,14 @@
                 </div>
                 <div class="d-grid gap-2 d-flex justify-content-center">
                   <v-btn
-                    class="btn btn-primary"
+                    class="btn text-white"
                     type="submit"
-                    label="Xác nhận"
+                    color="#2980e4"
                     @click="submit"
-                  />
-                  <v-btn class="btn btn-danger" type="reset" label="Hủy" />
+                    rounded="lg"
+                    size="x-large"
+                    >CẬP NHẬT</v-btn
+                  >
                 </div>
               </div>
             </div>
@@ -114,7 +116,7 @@ export default {
   created() {
     let profile = this.$store.state.user.user.profile;
     console.log(profile);
-    this.fullName = profile.firstName + " " + profile.lastName;
+    this.fullName = profile.lastName + " " + profile.firstName;
     let customField = JSON.parse(profile.customField);
     this.birthDay = customField.birthDay;
     this.email = profile.email;
@@ -164,27 +166,29 @@ export default {
   margin-left: 60px;
   margin-top: 20px;
   margin-right: 30px;
-  /* margin-bottom: 5px; */
   padding-top: 30px;
   padding-left: 25px;
   padding-right: 25px;
-  /* padding-bottom: 5px; */
   box-sizing: border-box;
   display: block;
   border-top-color: blue;
   border-top: 3px solid #2980e4;
   border-width: 2;
+  width: -webkit-fill-available;
 }
 .information {
   margin: 0px;
   padding-top: 0px;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 20px;
 }
 .title {
   margin: 0 10px 30px;
   border-bottom: 1px solid #d9d9d9;
-  font-family: "Times New Roman", Times, serif;
-  font-size: 20px;
   font-weight: 400;
   color: #0355b3;
+}
+.card-header {
+  background-color: #dfeaf7;
 }
 </style>
