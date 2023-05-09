@@ -44,7 +44,8 @@ const routes = [
     path: '/changePass',
     name: 'changePass',
     component: changePassVue
-  },{
+  },
+  {
     path: '/chart',
     name: 'chart',
     component: chartSOVue
