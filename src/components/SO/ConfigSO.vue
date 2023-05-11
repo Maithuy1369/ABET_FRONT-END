@@ -20,7 +20,6 @@
           type="submit"
           color="#2980e4"
           @click="createSO"
-          rounded="lg"
           size="x-large"
           >XÁC NHẬN</v-btn
         >
