@@ -61,5 +61,35 @@ export const documentAPI = {
         }
         console.log(options)
         return feeAjax(options)
+    },
+    deleteDocument(id) {
+        let feeUserInfo = JSON.parse(localStorage.getItem('feeUserInfo'))
+        let options = {
+            method: 'DELETE',
+            'contentType': 'application/json',
+            data: {id:id},
+            url: appConfigs.getAPIUrl(appConfigs.apiDomain.document) + 'delete-document',
+            headers: {
+                'Accept': 'application/json',
+          'Content-type': 'application/json',
+                authorization: 'Bearer '+ feeUserInfo.token
+            }
+        }
+        return feeAjax(options)
+    },
+    editDocument(data) {
+        let feeUserInfo = JSON.parse(localStorage.getItem('feeUserInfo'))
+        let options = {
+            method: 'PUT',
+            'contentType': 'application/json',
+            data: data,
+            url: appConfigs.getAPIUrl(appConfigs.apiDomain.document) + 'submit-report',
+            headers: {
+                'Accept': 'application/json',
+          'Content-type': 'application/json',
+                authorization: 'Bearer '+ feeUserInfo.token
+            }
+        }
+        return feeAjax(options)
     }
 }
