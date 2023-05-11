@@ -19,13 +19,12 @@
         </div>
       </div>
     </div>
-    <div class="btn" v-if="isSuperUser">
+    <div v-if="isSuperUser">
       <v-btn
         class="btn text-white"
         type="submit"
         color="#2980e4"
         @click="toConfigDocument"
-        rounded="lg"
         size="x-large"
       >
         <svg
@@ -33,7 +32,7 @@
           width="16"
           height="16"
           fill="currentColor"
-          class="bi bi-plus"
+          class="bi bi-plus text-white"
           viewBox="0 0 16 16"
         >
           <path

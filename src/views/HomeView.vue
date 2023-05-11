@@ -35,15 +35,17 @@ export default {
   position: fixed;
   top: 0;
   min-height: 50px;
-  margin-bottom: 0;
+  margin-bottom: 5px;
+  z-index: 1;
+  border-bottom-color: #0943b8;
 }
 .part21 {
   height: 100%;
   width: 230px;
-  background-color: gray-200;
+
   box-sizing: border-box;
   display: block;
-  margin-top: 2px;
+
   position: fixed;
 }
 .part22 {
@@ -52,7 +54,7 @@ export default {
   left: 0;
   position: relative;
   margin-left: 230px;
-  min-height: 100%;
+  height: 100%;
   box-sizing: border-box;
   display: block;
 }

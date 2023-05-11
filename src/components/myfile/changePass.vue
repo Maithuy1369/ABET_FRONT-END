@@ -35,7 +35,6 @@
             type="submit"
             color="#2980e4"
             @click="submit"
-            rounded="lg"
             size="large"
             >XÁC NHẬN</v-btn
           >
@@ -44,7 +43,6 @@
             type="reset"
             color="#e44110"
             @click="submit"
-            rounded="lg"
             size="large"
             >HỦY</v-btn
           >
