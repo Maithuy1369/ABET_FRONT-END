@@ -1,116 +1,153 @@
 <template>
-  <div class="part22-card card container-fluid">
+  <div class="part22-card card">
     <div class="back" data-app>
-      <h1>Tạo văn bản mới</h1>
+      <div class="title">
+        <span> TẠO MẪU PHIẾU MỚI</span>
+      </div>
+      <div class="task">
+        <v-btn color="#2980e4 " class="text-white">
+          <v-file-input
+            style="width: 50%"
+            @change="handleFile"
+            id="file"
+            v-model="file"
+            rounded="lg"
+            class="text-white"
+          />
+          Nhập dữ liệu từ Excel
+        </v-btn>
+      </div>
       <div class="config-document-config">
-        <div class="config-document-config-field">
-          <div class="input-field">
-            <p>Trường tương ứng với tên sinh viên(firstName):</p>
-            <v-text-field
-              v-model="firstNameField"
-              type="text"
-              placeholder="name display"
-            ></v-text-field>
-          </div>
-          <div class="input-field">
-            <p>Trường tương ứng với tên sinh viên(lastName):</p>
-            <v-text-field
-              v-model="lastNameField"
-              type="text"
-              placeholder="name display"
-            ></v-text-field>
-          </div>
-          <div class="input-field">
-            <p>Trường tương ứng với mã lớp:</p>
-            <v-text-field
-              v-model="classId"
-              type="text"
-              placeholder="name display"
-            ></v-text-field>
-          </div>
-          <div class="input-field">
-            <p>Tên báo cáo:</p>
-            <v-text-field
-              v-model="documentName"
-              type="text"
-              placeholder="name display"
-            ></v-text-field>
-          </div>
-          <div class="input-field">
-            <p>Trường tương ứng với mã sinh viên:</p>
-            <v-text-field
-              v-model="studentIdField"
-              type="text"
-              placeholder="id"
-            ></v-text-field>
-          </div>
-          <div class="input-field">
-            <p>Assessor:</p>
-            <v-autocomplete
-              v-model="assesorId"
-              :items="allUser"
-              filled
-              chips
-              color="blue-grey lighten-2"
-              label="Select"
-              item-value="userName"
-              multiple
-            >
-              <template v-slot:selection="data">
-                <v-chip
-                  v-bind="data.attrs"
-                  :input-value="data.selected"
-                  close
-                  @click="data.select"
-                  @click:close="remove(data.item)"
-                >
-                  {{ data.item.firstName + " " + data.item.lastName }}
-                </v-chip>
-              </template>
-              <template v-slot:item="data">
-                <template>
-                  <v-list-item-content>
-                    <v-list-item-title
-                      v-html="data.item.firstName + ' ' + data.item.lastName"
-                    ></v-list-item-title>
-                  </v-list-item-content>
-                </template>
-              </template>
-            </v-autocomplete>
-          </div>
-          <div class="input-field">
-            <p>Assessor:</p>
-            <v-autocomplete
-              v-model="verifierId"
-              :items="allUser"
-              filled
-              chips
-              color="blue-grey lighten-2"
-              label="Select"
-              item-value="userName"
-            >
-              <template v-slot:selection="data">
-                <v-chip
-                  v-bind="data.attrs"
-                  :input-value="data.selected"
-                  close
-                  @click="data.select"
-                  @click:close="remove(data.item)"
-                >
-                  {{ data.item.firstName + " " + data.item.lastName }}
-                </v-chip>
-              </template>
-              <template v-slot:item="data">
-                <template>
-                  <v-list-item-content>
-                    <v-list-item-title
-                      v-html="data.item.firstName + ' ' + data.item.lastName"
-                    ></v-list-item-title>
-                  </v-list-item-content>
-                </template>
-              </template>
-            </v-autocomplete>
-          </div>
+        <div>
+          <table>
+            <tr>
+              <th>
+                <div class="input-field">
+                  <p>FirstName:</p>
+                  <v-text-field
+                    v-model="firstNameField"
+                    type="text"
+                    placeholder="Tên hiển thị"
+                  ></v-text-field>
+                </div>
+              </th>
+              <th>
+                <div class="input-field">
+                  <p>LastName:</p>
+                  <v-text-field
+                    v-model="lastNameField"
+                    type="text"
+                    placeholder="Họ đệm"
+                  ></v-text-field>
+                </div>
+              </th>
+              <th>
+                <div class="input-field">
+                  <p>Mã lớp:</p>
+                  <v-text-field
+                    v-model="classId"
+                    type="text"
+                    placeholder="Mã lớp"
+                  ></v-text-field>
+                </div>
+              </th>
+              <th>
+                <div class="input-field">
+                  <p>Tên báo cáo:</p>
+                  <v-text-field
+                    v-model="documentName"
+                    type="text"
+                    placeholder="Tên phiếu"
+                  ></v-text-field>
+                </div>
+              </th>
+              <th>
+                <div class="input-field">
+                  <p>Mã sinh viên:</p>
+                  <v-text-field
+                    v-model="studentIdField"
+                    type="text"
+                    placeholder="Mã sinh viên"
+                  ></v-text-field>
+                </div>
+              </th>
+              <th>
+                <div class="input-field">
+                  <p>Assessor:</p>
+                  <v-autocomplete
+                    v-model="assesorId"
+                    :items="allUser"
+                    filled
+                    chips
+                    color="blue-grey lighten-2"
+                    label="Select"
+                    item-value="userName"
+                    multiple
+                  >
+                    <template v-slot:selection="data">
+                      <v-chip
+                        v-bind="data.attrs"
+                        :input-value="data.selected"
+                        close
+                        @click="data.select"
+                        @click:close="remove(data.item)"
+                      >
+                        {{ data.item.firstName + " " + data.item.lastName }}
+                      </v-chip>
+                    </template>
+                    <template v-slot:item="data">
+                      <template>
+                        <v-list-item-content>
+                          <v-list-item-title
+                            v-html="
+                              data.item.firstName + ' ' + data.item.lastName
+                            "
+                          ></v-list-item-title>
+                        </v-list-item-content>
+                      </template>
+                    </template>
+                  </v-autocomplete>
+                </div>
+              </th>
+              <th>
+                <div class="input-field">
+                  <p>Assessor:</p>
+                  <v-autocomplete
+                    v-model="verifierId"
+                    :items="allUser"
+                    filled
+                    chips
+                    color="blue-grey lighten-2"
+                    label="Select"
+                    item-value="userName"
+                  >
+                    <template v-slot:selection="data">
+                      <v-chip
+                        v-bind="data.attrs"
+                        :input-value="data.selected"
+                        close
+                        @click="data.select"
+                        @click:close="remove(data.item)"
+                      >
+                        {{ data.item.firstName + " " + data.item.lastName }}
+                      </v-chip>
+                    </template>
+                    <template v-slot:item="data">
+                      <template>
+                        <v-list-item-content>
+                          <v-list-item-title
+                            v-html="
+                              data.item.firstName + ' ' + data.item.lastName
+                            "
+                          ></v-list-item-title>
+                        </v-list-item-content>
+                      </template>
+                    </template>
+                  </v-autocomplete>
+                </div>
+              </th>
+            </tr>
+          </table>
         </div>
         <div class="input-field">
           <p>PI Field(Chọn nhiều trường):</p>
@@ -126,13 +163,30 @@
           >
           </v-autocomplete>
         </div>
-        <div style="width: 30%">
-          <p>Import danh sách dạng excel vào:</p>
-          <v-file-input id="file" v-model="file" @change="handleFile" />
-        </div>
-        <div style="display: flex; justify-content: center; margin: 30px">
-          <v-btn @click="createDocument"> submit </v-btn>
-        </div>
+      </div>
+      <div style="display: flex; justify-content: start; margin: 30px">
+        <v-btn
+          class="btn text-white"
+          type="submit"
+          color="#2980e4"
+          @click="createDocument"
+          rounded="lg"
+          size="x-large"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-plus"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"
+            />
+          </svg>
+          LƯU LẠI</v-btn
+        >
       </div>
       <ag-grid-vue
         style="width: 90%; height: 900px; margin: 0 auto"
@@ -275,7 +329,7 @@ export default {
   position: relative;
   margin-left: 60px;
   margin-top: 20px;
-  margin-right: 30px;
+  margin-right: 25px;
   margin-bottom: 20px;
   padding-top: 30px;
   padding-left: 25px;
@@ -286,6 +340,32 @@ export default {
   border-top-color: blue;
   border-top: 3px solid #2980e4;
   border-width: 2;
+  width: -webkit-fill-available;
+}
+.title {
+  margin: 0 10px 30px;
+  border-bottom: 1px solid #d9d9d9;
+  font-weight: 400;
+  color: #0355b3;
+}
+.task {
+  margin-bottom: 20px;
+  justify-content: end;
+}
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th,
+td {
+  border: 1px solid rgb(159, 171, 187);
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
 }
 .config-document-config {
 }

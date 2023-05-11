@@ -16,7 +16,15 @@
             </div>
             <div classId="d-grid justify-space-center ">
                 <v-btn @click="createSO">Xác nhận</v-btn>
-                <!-- CHỖ NÀY BẠN THÊM PHẦN XÓA GIÚP T -->
+                <v-btn
+                    class="btn text-white"
+                    type="submit"
+                    color="#2980e4"
+                    @click="createSO"
+                    rounded="lg"
+                    size="x-large"
+                    >XÁC NHẬN</v-btn
+                >
             </div>
         </div>
     </div>

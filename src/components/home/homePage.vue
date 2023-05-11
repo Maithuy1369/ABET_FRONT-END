@@ -1,5 +1,5 @@
 <template>
-  <div class="part22-card card fluid"><h2>đây la trang chu</h2></div>
+  <div class="part22-card card"><h2>đây la trang chu</h2></div>
 </template>
 <script></script>
 <style>
@@ -18,5 +18,6 @@
 
   border-top: 3px solid #2980e4;
   border-width: 2;
+  width: -webkit-fill-available;
 }
 </style>

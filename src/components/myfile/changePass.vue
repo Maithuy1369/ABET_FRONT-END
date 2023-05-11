@@ -30,8 +30,24 @@
           </div>
         </div>
         <div class="d-grid gap-2 d-flex justify-content-center">
-          <v-btn class="btn btn-primary" type="submit" label="Xác nhận" />
-          <v-btn class="btn btn-danger" type="reset" label="Huỷ" />
+          <v-btn
+            class="btn text-white"
+            type="submit"
+            color="#2980e4"
+            @click="submit"
+            rounded="lg"
+            size="large"
+            >XÁC NHẬN</v-btn
+          >
+          <v-btn
+            class="btn text-white"
+            type="reset"
+            color="#e44110"
+            @click="submit"
+            rounded="lg"
+            size="large"
+            >HỦY</v-btn
+          >
         </div>
       </div>
     </div>

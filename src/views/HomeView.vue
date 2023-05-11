@@ -37,12 +37,6 @@ export default {
     min-height: 50px;
     margin-bottom: 0;
 }
-/* .part2 {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  height: 90%;
-} */
 .part21 {
     height: 100%;
     width: 230px;
@@ -53,8 +47,8 @@ export default {
     position: fixed;
 }
 .part22 {
-    width: calc(100% - 230px);
-    /* width: -webkit-fill-available; Mozilla-based browsers will ignore this. */
+    width: 100%;
+    width: -webkit-fill-available; /*Mozilla-based browsers will ignore this. */
     left: 0;
     position: relative;
     margin-left: 230px;

@@ -34,13 +34,15 @@
             <!-- You don't have an account? <span @click="moveToRegister">Register</span> -->
           </div>
           <div class="row">
-            <button
+            <v-btn
               type="submit"
               class="mt-1 btn-per text-white front-bold"
               id="repass_button"
+              color="#2980e4"
+              size="x-large"
             >
               Khôi phục mật khẩu
-            </button>
+            </v-btn>
           </div>
 
           <div class="row">
@@ -173,21 +175,18 @@ export default {
   margin-top: 20px;
   justify-content: center;
 }
-form button {
-  float: left;
+.v-btn {
+  float: center;
+  padding: 10px;
   margin-bottom: 10px;
-  margin-top: 10px;
-  padding-top: 10px;
-  padding-left: 20px;
-  padding-bottom: 10px;
-  padding-right: 20px;
+  color: #fff;
   border: none;
   border-radius: 5px;
-
+  cursor: pointer;
   justify-content: center;
 }
 
-form button:hover {
+.v-btn:hover {
   background-color: #acacf2;
 
   /* background-color: #e7f0f6; */
