@@ -44,5 +44,21 @@ export const userAPI = {
             }
         }
         return feeAjax(options)
+    },
+    resetPassword(userName){
+        let feeUserInfo = JSON.parse(localStorage.getItem('feeUserInfo'))
+        let options = {
+            method: 'POST',
+            crossDomain: true,
+            data: {
+                userName:userName
+            },
+            
+            url: appConfigs.getAPIUrl(appConfigs.apiDomain.auth) + 'reset-password',
+            headers: {
+                authorization: 'Bearer '+ feeUserInfo.token
+            }
+        }
+        return feeAjax(options)
     }
 }
