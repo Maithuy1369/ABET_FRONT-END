@@ -285,6 +285,7 @@ export default {
 }
 .bt-list {
   margin-left: 36px;
+  }
 .group1 {
   color: black;
 
