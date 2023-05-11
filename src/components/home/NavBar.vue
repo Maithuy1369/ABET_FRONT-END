@@ -1,10 +1,12 @@
 <template>
   <div class="v-nav-bar text-white">
     <div class="d-flex flex-column flex-shrink-0 p-3">
-      <div class="h-[55px] text-white flex items-center just-">
+
+      <div class="h-[55px] text-black flex items-center">
         <span>HỆ THỐNG ĐIỆN TỬ</span>
       </div>
-      <hr class="text-white" />
+      <hr class="text-black" />
+
       <!--[-->
       <div class="group1">
         <svg
@@ -104,7 +106,9 @@
                 :key="'detail' + I"
                 style="cursor: pointer"
                 @click="() => allDocumentBySO(soo.id)"
-                class="bt-list group1"
+
+                class="group1"
+
               >
                 {{ soo.name }}
               </div>
@@ -248,44 +252,49 @@ export default {
 <style>
 .v-nav-bar {
   height: calc((100%-59px - 0px) - 0px);
-  background-color: #0d0d24;
+  background-color: #fcfdf0e7;
   position: fixed;
   table-layout: fixed;
   display: table;
   box-sizing: border-box;
   font-family: "Times New Roman", Times, serif;
   font-size: 20px;
+  border-right: 1px solid #284f7a;
+
 }
 
 .material-symbols-outlined {
   font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 48;
-  color: #ffffff;
+  color: black;
 }
 .material-symbols-outlined-1 {
   font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 48;
-  color: #ffffff;
+  color: black;
 }
-.button {
-  background-color: #323275;
+/* .button {
+  background-color: #756332;
 }
 .button:hover {
-  background-color: #4b4b92;
-}
+  background-color: #f0ed4c;
+} */
 .bi {
   margin-right: 5px;
   width: 30px;
   height: 30px;
-  color: #ffffff;
+  color: black;
 }
 .bt-list {
   margin-left: 36px;
+.group1 {
+  color: black;
+
 }
 .group1:hover {
   cursor: pointer;
   pointer-events: auto;
   box-sizing: inherit;
-  border-style: solid;
-  background-color: #ac7524;
+  border-style: solid #ade9d5;
+  background-color: #ccf580;
   position: relative;
   border-radius: 5px;
 }

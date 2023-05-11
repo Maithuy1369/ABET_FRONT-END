@@ -1,16 +1,19 @@
 <template>
-    <div>
-        <ag-grid-vue
-            style="width: 90%; height: 400px; margin: 0 auto"
-            class="ag-theme-alpine"
-            :columnDefs="columnDefs"
-            :rowData="rawData"
-            :defaultColDef="defaultColDef"
-            v-if="agReady"
-        >
-        </ag-grid-vue>
-        <v-btn @click="edit" v-if="editable">submit</v-btn>
+
+  <div>
+    <div class="part22-card card fluid">
+      <ag-grid-vue
+        style="width: 100%; height: 500px; margin: 0 auto"
+        class="ag-theme-alpine"
+        :columnDefs="columnDefs"
+        :rowData="rawData"
+        :defaultColDef="defaultColDef"
+        v-if="agReady"
+      >
+      </ag-grid-vue>
     </div>
+  </div>
+
 </template>
 <script>
 import { documentAPI } from "@/api/document";
@@ -182,17 +185,34 @@ export default {
 </script>
 <style>
 /* .ag-theme-alpine {
-    --ag-header-column-separator-display: block;
-    --ag-header-column-separator-height: 100%;
-    --ag-header-column-separator-width: 2px;
-    --ag-header-column-separator-color: purple;
+  --ag-header-column-separator-display: block;
+  --ag-header-column-separator-height: 100%;
+  --ag-header-column-separator-width: 2px;
+  --ag-header-column-separator-color: purple;
 
-    --ag-header-column-resize-handle-display: block;
-    --ag-header-column-resize-handle-height: 25%;
-    --ag-header-column-resize-handle-width: 5px;
-    --ag-header-column-resize-handle-color: orange;
+  --ag-header-column-resize-handle-display: block;
+  --ag-header-column-resize-handle-height: 25%;
+  --ag-header-column-resize-handle-width: 5px;
+  --ag-header-column-resize-handle-color: orange;
 } */
 .ag-root-wrapper {
-    border: none !important;
+
+  border: none !important;
+}
+.part22-card {
+  position: relative;
+  margin-left: 60px;
+  margin-top: 20px;
+  margin-right: 30px;
+  padding-top: 30px;
+  padding-left: 25px;
+  padding-right: 25px;
+  box-sizing: border-box;
+  display: block;
+  border-top-color: blue;
+  border-top: 3px solid #2980e4;
+  border-width: 2;
+  width: -webkit-fill-available;
+
 }
 </style>
