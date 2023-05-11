@@ -5,6 +5,7 @@
         <span> TẠO MẪU PHIẾU MỚI</span>
       </div>
       <div class="task">
+
         <span>Nhập dữ liệu từ Excel</span>
         <v-file-input
           style="width: 50%"
@@ -175,6 +176,7 @@
             width="16"
             height="16"
             fill="currentColor"
+
             class="bi bi-plus text-white"
             viewBox="0 0 16 16"
           >

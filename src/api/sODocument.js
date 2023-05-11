@@ -52,6 +52,21 @@ export const sODocumentAPI = {
             }
         }
         return feeAjax(options)
+    },
+    deleteDocument(id) {
+        let feeUserInfo = JSON.parse(localStorage.getItem('feeUserInfo'))
+        let options = {
+            method: 'DELETE',
+            'contentType': 'application/json',
+            data: {id:id},
+            url: appConfigs.getAPIUrl(appConfigs.apiDomain.sODocument) + 'delete-SO',
+            headers: {
+                'Accept': 'application/json',
+          'Content-type': 'application/json',
+                authorization: 'Bearer '+ feeUserInfo.token
+            }
+        }
+        return feeAjax(options)
     }
     
 }

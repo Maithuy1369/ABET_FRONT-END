@@ -190,8 +190,4 @@ export default {
 .card-header {
   background-color: #dfeaf7;
 }
-.row {
-  padding-left: 12px;
-  padding-right: 12px;
-}
 </style>

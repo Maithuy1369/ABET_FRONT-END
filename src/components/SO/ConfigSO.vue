@@ -1,10 +1,9 @@
 <template>
-  <div class="part22-card card container-fluid">
-    <div data-app>
-      <div class="title">
-        <span> DANH SÁCH CÁC SO</span>
-      </div>
-
+    <div class="part22-card card container-fluid">
+        <div data-app>
+            <div class="title">
+                <span> DANH SÁCH CÁC SO</span>
+            </div>
       <div class="title-1" style="width: 50%">
         <v-autocomplete
           label="Lựa chọn SO"
@@ -25,55 +24,55 @@
         >
       </div>
     </div>
-  </div>
 </template>
 <script>
 import { sODocumentAPI } from "@/api/sODocument";
 import dayjs from "dayjs";
 export default {
-  methods: {
-    async createSO() {
-      if (this.name == null || this.description == "") {
-        return;
-      }
-      let currentYear = dayjs().year();
-      let a = sODocumentAPI.createSODocument(
-        this.name,
-        this.description,
-        currentYear
-      );
-      console.log(a);
+    methods: {
+        async createSO() {
+            if (this.name == null || this.description == "") {
+                return;
+            }
+            let currentYear = dayjs().year();
+            let a = sODocumentAPI.createSODocument(
+                this.name,
+                this.description,
+                currentYear
+            );
+            console.log(a);
+        },
     },
-  },
-  data() {
-    return {
-      description: "",
-      soNameOptions: [
-        "Đánh giá SO1",
-        "Đánh giá SO2",
-        "Đánh giá SO3",
-        "Đánh giá SO4",
-        "Đánh giá SO5",
-      ],
-      name: null,
-    };
-  },
+    data() {
+        return {
+            description: "",
+            soNameOptions: [
+                "Đánh giá SO1",
+                "Đánh giá SO2",
+                "Đánh giá SO3",
+                "Đánh giá SO4",
+                "Đánh giá SO5",
+            ],
+            name: null,
+        };
+    },
 };
 </script>
 <style>
 .title {
-  margin: 0 20px 8px;
-  border-bottom: 1px solid #d9d9d9;
-  font-family: "Times New Roman", Times, serif;
-  font-size: 20px;
-  font-weight: 400;
-  color: #0355b3;
+    margin: 0 20px 8px;
+    border-bottom: 1px solid #d9d9d9;
+    font-family: "Times New Roman", Times, serif;
+    font-size: 20px;
+    font-weight: 400;
+    color: #0355b3;
 }
 .title-1 {
-  margin: 0 20px 15px;
-  padding: 30px;
+    margin: 0 20px 15px;
+    padding: 30px;
 }
 .part22-card {
+
   position: relative;
   margin-left: 60px;
   margin-top: 20px;
@@ -89,5 +88,6 @@ export default {
   border-top: 3px solid #2980e4;
   border-width: 2;
   width: -webkit-fill-available;
+
 }
 </style>

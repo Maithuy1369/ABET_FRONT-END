@@ -8,8 +8,10 @@
           alt="logoHAUI"
           style="margin-top: 3px"
         />
+
         <v-spacer class="title1 pt-2">
           <div><strong>Chương trình kiểm định theo chuẩn ABET</strong></div>
+
         </v-spacer>
         <!-- <div class="right" for="inputFullname">
           <input class="form-control" v-model="fullName" type="text" />
@@ -51,11 +53,13 @@ export default {
 
 <style>
 .v-app-bar {
+
   background-color: #0c5ebb;
   font-family: "Times New Roman", Times, serif;
   font-size: 26px;
   padding-bottom: 10px;
   border-bottom: 1px solid #b8bec5;
+
 
   /* position: fixed; */
 }
