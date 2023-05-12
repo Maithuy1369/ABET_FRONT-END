@@ -19,6 +19,19 @@ export const userAPI = {
         return feeAjax(options)
         // return coreAPI.post('login', data)
     },
+    testHelthToken() {
+        let feeUserInfo = JSON.parse(localStorage.getItem('feeUserInfo'))
+        let options = {
+            method: 'GET',
+            crossDomain: true,
+            data:{},
+            url: appConfigs.getAPIUrl(appConfigs.apiDomain.auth) + 'testJWT',
+            headers: {
+                authorization: 'Bearer '+ feeUserInfo.token
+            }
+        }
+        return feeAjax(options)
+    },
     getAllUserInfo() {
         let options = {
             method: 'GET',
