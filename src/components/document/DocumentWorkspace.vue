@@ -25,14 +25,7 @@ export default {
     methods: {
         edit() {
             let data = [];
-            // for (let i in this.rawData) {
-            //     let d = this.rawData[i];
-            //     let value = JSON.parse(d.value);
-            //     for (let v of Object.keys(value)) {
-            //         value[v] = d[(v + d.feeValueField).replaceAll(".", "")];
-            //     }
-            //     data.push({ ...d, value: JSON.stringify(value) });
-            // }
+
             for (let i in this.detailDocumentOrigin.data) {
                 let dataO = this.detailDocumentOrigin.data[i].detail;
                 for (let d in dataO) {
@@ -43,10 +36,12 @@ export default {
                     for (let v of Object.keys(value)) {
                         let feeValueField = dataO[d].feeValueField;
                         console.log(feeValueField);
-                        value[v] =
-                            rawData[
-                                v + dataO[d].feeValueField.replaceAll(".", "")
-                            ];
+                        let customField = (
+                            v + dataO[d].feeValueField
+                        ).replaceAll(".", "");
+                        value[v] = rawData[customField]
+                            ? rawData[customField]
+                            : value[v];
                     }
                     dataO[d].value = JSON.stringify(value);
                     data.push(dataO[d]);
@@ -59,6 +54,7 @@ export default {
         let id = this.$route.params.id;
         let res = await documentAPI.getDetailDocument(id);
         if (res.status == 200) {
+            let rawData = [];
             this.$set(this, "detailDocumentOrigin", res.data);
             // this.detailDocumentOrigin = res.data;
             this.editable = this.detailDocumentOrigin.assessorId.includes(
@@ -120,7 +116,7 @@ export default {
                         a.detail[i] = { ...b, ...v };
                     });
                 }
-                let rawData = [...this.rawData, ...a.detail];
+                rawData = [...rawData, ...a.detail];
                 let distinc = [];
                 rawData = rawData.filter((a) => {
                     if (distinc.indexOf(a.id)) {
@@ -129,9 +125,10 @@ export default {
                     distinc.push(a.id);
                     return true;
                 });
-                this.rawData = rawData;
-                this.rawData = [...this.rawData, ...a.detail];
+
+                // this.rawData = [...this.rawData, ...a.detail];
             });
+            this.rawData = rawData;
             this.agReady = true;
         }
     },
