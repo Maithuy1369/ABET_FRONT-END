@@ -11,7 +11,7 @@
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="currentColor"
-          class="bi bi-house"
+          class="bi bi-house text-black"
           viewBox="0 -1.5 16 24"
         >
           <path
@@ -30,7 +30,7 @@
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="currentColor"
-            class="bi bi-person"
+            class="bi bi-person text-black"
             viewBox="0 -1.5 16 24"
           >
             <path
@@ -71,7 +71,7 @@
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="currentColor"
-              class="bi bi-clipboard-check"
+              class="bi bi-clipboard-check text-black"
               viewBox="0 -1.5 16 24"
             >
               <path
@@ -122,7 +122,7 @@
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="currentColor"
-          class="bi bi-bar-chart-line"
+          class="bi bi-bar-chart-line text-black"
           viewBox="0 -1.5 16 24"
         >
           <path
@@ -139,7 +139,7 @@
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="currentColor"
-          class="bi bi-power"
+          class="bi bi-power text-black"
           viewBox="0 -1.5 16 24"
         >
           <path d="M7.5 1v7h1V1h-1z" />

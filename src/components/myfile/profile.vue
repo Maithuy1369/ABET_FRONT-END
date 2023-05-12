@@ -153,6 +153,7 @@ export default {
         customField: customField,
       };
       userAPI.updateUserInfo(data);
+      alert("Gửi yêu cầu cập nhật thành công!");
     },
   },
 };

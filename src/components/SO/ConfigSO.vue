@@ -24,9 +24,7 @@
         >
       </div>
     </div>
-
-    </div>
-
+  </div>
 </template>
 <script>
 import { sODocumentAPI } from "@/api/sODocument";
@@ -37,6 +35,7 @@ export default {
       if (this.name == null || this.description == "") {
         return;
       }
+      // alert("Đã gửi xác nhận!");
       let currentYear = dayjs().year();
       let a = sODocumentAPI.createSODocument(
         this.name,
