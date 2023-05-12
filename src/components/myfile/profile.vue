@@ -11,7 +11,7 @@
             <div class="card-body text-center">
               <img
                 class="img-account-profile rounded-circle mb-3"
-                src="@/assets/image/logo_haui.jpg"
+                src="@/assets/image/user.jpg"
                 alt="avatar"
                 style="width: 150px"
               />
@@ -22,7 +22,6 @@
                   id="inputGroupFile04"
                   aria-describedby="inputGroupFileAddon04"
                 />
-                <!-- <v-btn @click="profile">Tải ảnh lên</v-btn> -->
               </div>
             </div>
           </div>
@@ -143,7 +142,7 @@ export default {
       let customField = JSON.stringify({
         birthDay: this.birthDay,
         address: this.address,
-        number: this.numBer,
+        numBer: this.numBer,
         position: this.position,
         workPlace: this.workPlace,
       });
