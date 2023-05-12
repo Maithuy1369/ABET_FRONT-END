@@ -283,8 +283,10 @@ export default {
 }
 .bt-list {
   margin-left: 36px;
+
   color: black;
 }
+
 .group1 {
   color: black;
 }
