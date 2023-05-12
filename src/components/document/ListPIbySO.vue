@@ -31,7 +31,6 @@
                 type="submit"
                 color="#2980e4"
                 @click="toConfigDocument"
-                rounded="lg"
                 size="x-large"
             >
                 <svg
@@ -98,21 +97,23 @@ export default {
 </script>
 <style>
 .part22-card {
-    position: relative;
-    margin-left: 60px;
-    margin-top: 20px;
-    margin-right: 100px;
-    margin-bottom: 20px;
-    padding-top: 30px;
-    padding-left: 25px;
-    padding-right: 50px;
-    padding-bottom: 25px;
-    box-sizing: border-box;
-    display: block;
-    border-top-color: blue;
-    border-top: 3px solid #2980e4;
-    border-width: 2;
-    width: -webkit-fill-available;
+
+  position: relative;
+  margin-left: 60px;
+  margin-top: 20px;
+  margin-right: 100px;
+  margin-bottom: 20px;
+  padding-top: 30px;
+  padding-left: 25px;
+  padding-right: 50px;
+  padding-bottom: 25px;
+  box-sizing: border-box;
+  display: block;
+  border-top-color: blue;
+  border-top: 3px solid #2980e4;
+  border-width: 2;
+  width: -webkit-fill-available;
+
 }
 .title {
     margin: 0 20px 8px;
@@ -124,7 +125,8 @@ export default {
     color: #0355b3;
 }
 .btn {
-    margin-left: 50px;
-    font-family: "Times New Roman", Times, serif;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 18px;
+
 }
 </style>

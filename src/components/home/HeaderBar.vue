@@ -6,28 +6,65 @@
           src="@/assets/image/logo_haui.jpg"
           max-width="50"
           alt="logoHAUI"
+          style="margin-top: 3px"
         />
-        <v-spacer class="text-center justify-space-around text-white pt-1">
-          <div><strong>Khoa Điện tử - HaUI</strong></div>
-          <div>Chương trình kiểm định theo chuẩn ABET</div>
+
+        <v-spacer class="title1 pt-2">
+          <div><strong>Chương trình kiểm định theo chuẩn ABET</strong></div>
+
         </v-spacer>
+        <!-- <div class="right" for="inputFullname">
+          <input class="form-control" v-model="fullName" type="text" />
+        </div> -->
       </v-list-item>
     </div>
   </div>
 </template>
 
 <script>
+import { userAPI } from "@/api/user";
 export default {
   name: "headerBar",
+  created() {
+    let headerBar = this.$store.state.user.user.headerBar;
+    console.log(headerBar);
+    this.fullName = headerBar.lastName + " " + headerBar.firstName;
+  },
+  data() {
+    return {
+      fullName: "",
+    };
+  },
+  methods: {
+    submit() {
+      let name = this.fullName.split(" ");
+      let firstName = name[name.length - 1];
+      let lastName = name.slice(0, name.length - 1).join(" ");
+
+      let data = {
+        firstName: firstName,
+        lastName: lastName,
+      };
+      userAPI.updateUserInfo(data);
+    },
+  },
 };
 </script>
 
 <style>
 .v-app-bar {
-  background-color: #0d0461;
+
+  background-color: #0c5ebb;
   font-family: "Times New Roman", Times, serif;
-  font-size: 19px;
+  font-size: 26px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #b8bec5;
+
 
   /* position: fixed; */
+}
+.title1 {
+  color: #ffffff;
+  margin-left: 50px;
 }
 </style>

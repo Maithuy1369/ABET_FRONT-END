@@ -32,6 +32,7 @@
                         </label>
                     </div>
 
+
                     <div class="alternative-option mt-4">
                         <!-- You don't have an account? <span @click="moveToRegister">Register</span> -->
                     </div>
@@ -47,6 +48,7 @@
                             Khôi phục mật khẩu
                         </v-btn>
                     </div>
+
 
                     <div class="row">
                         <div class="splash-footer mx-auto text-center">
@@ -170,6 +172,7 @@ export default {
     justify-content: center;
 }
 .v-btn {
+
     float: center;
     padding: 10px;
     margin-bottom: 10px;
@@ -182,6 +185,7 @@ export default {
 
 .v-btn:hover {
     background-color: #acacf2;
+
 
     /* background-color: #e7f0f6; */
 }

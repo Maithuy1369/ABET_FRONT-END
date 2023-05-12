@@ -56,7 +56,7 @@
                   <label class="small mb-1" for="inputAddress">Địa chỉ</label>
                   <input class="form-control" v-model="address" type="text" />
                 </div>
-                <div class="row gx-3 mb-0">
+                <div class="row gx-3 mb-3">
                   <div class="col-md-6">
                     <label class="small mb-1" for="inputEmail">Email</label>
                     <input class="form-control" v-model="email" type="email" />
@@ -94,7 +94,6 @@
                     type="submit"
                     color="#2980e4"
                     @click="submit"
-                    rounded="lg"
                     size="x-large"
                     >CẬP NHẬT</v-btn
                   >

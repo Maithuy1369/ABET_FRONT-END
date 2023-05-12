@@ -5,17 +5,15 @@
                 <span> TẠO MẪU PHIẾU MỚI</span>
             </div>
             <div class="task">
-                <!-- <v-btn color="#2980e4 " class="text-white"> -->
+                <span>Nhập dữ liệu từ Excel</span>
                 <v-file-input
                     style="width: 50%"
                     @change="handleFile"
                     id="file"
                     v-model="file"
-                    rounded="lg"
                     class="text-white"
+                    label="Chọn file"
                 />
-                Nhập dữ liệu từ Excel
-                <!-- </v-btn> -->
             </div>
             <div class="config-document-config">
                 <div>
@@ -184,7 +182,6 @@
                     type="submit"
                     color="#2980e4"
                     @click="createDocument"
-                    rounded="lg"
                     size="x-large"
                 >
                     <svg
@@ -192,7 +189,7 @@
                         width="16"
                         height="16"
                         fill="currentColor"
-                        class="bi bi-plus"
+                        class="bi bi-plus text-white"
                         viewBox="0 0 16 16"
                     >
                         <path
