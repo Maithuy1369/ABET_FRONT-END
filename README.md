@@ -1,4 +1,4 @@
-# backend_abet
+# frontend_abet
 
 ## Project setup
 ```
