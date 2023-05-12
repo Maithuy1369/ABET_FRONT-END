@@ -1,7 +1,6 @@
 <template>
   <div class="v-nav-bar text-white">
     <div class="d-flex flex-column flex-shrink-0 p-3">
-
       <div class="h-[55px] text-black flex items-center">
         <span>HỆ THỐNG ĐIỆN TỬ</span>
       </div>
@@ -100,15 +99,15 @@
               :key="index"
               class="mb-1"
             >
-              <span>Năm: {{ key }}</span>
+              <span
+                ><strong>Năm: {{ key }}</strong></span
+              >
               <div
                 v-for="(soo, I) in value"
                 :key="'detail' + I"
                 style="cursor: pointer"
                 @click="() => allDocumentBySO(soo.id)"
-
                 class="group1"
-
               >
                 {{ soo.name }}
               </div>
@@ -260,7 +259,6 @@ export default {
   font-family: "Times New Roman", Times, serif;
   font-size: 20px;
   border-right: 1px solid #284f7a;
-
 }
 
 .material-symbols-outlined {
@@ -285,10 +283,17 @@ export default {
 }
 .bt-list {
   margin-left: 36px;
-  }
+
+  color: black;
+}
+
 .group1 {
   color: black;
-
+}
+.group1:active {
+  cursor: pointer;
+  pointer-events: auto;
+  color: #c52020 !important;
 }
 .group1:hover {
   cursor: pointer;

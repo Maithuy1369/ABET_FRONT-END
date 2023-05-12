@@ -41,6 +41,9 @@
               />
             </label>
           </div>
+          <p v-if="loginError" class="error-message text-center">
+            *Sai tên người dùng hoặc mật khẩu!
+          </p>
           <div class="row">
             <div class="splash-footer text-center mx-auto">
               <span style="color: red"> Bạn quên mật khẩu? </span>
@@ -97,6 +100,7 @@ export default {
     return {
       userName: "",
       password: "",
+      loginError: false,
     };
   },
   methods: {
@@ -114,6 +118,14 @@ export default {
       }
 
       console.log(res);
+      if (this.username === "admin" && this.password === "password") {
+        // Đăng nhập thành công
+        this.loginError = false;
+        // Tiến hành đăng nhập...
+      } else {
+        // Đăng nhập thất bại
+        this.loginError = true;
+      }
     },
     moveToRegister() {
       this.$router.push("/register");
@@ -182,6 +194,9 @@ export default {
   color: #ec323b;
   margin-bottom: 5px;
   margin-top: 5px;
+}
+.error-message {
+  color: red;
 }
 .v-btn {
   float: center;

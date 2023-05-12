@@ -11,11 +11,10 @@
 
         <v-spacer class="title1 pt-2">
           <div><strong>Chương trình kiểm định theo chuẩn ABET</strong></div>
-
         </v-spacer>
-        <!-- <div class="right" for="inputFullname">
+        <div class="right" for="inputFullname">
           <input class="form-control" v-model="fullName" type="text" />
-        </div> -->
+        </div>
       </v-list-item>
     </div>
   </div>
@@ -42,6 +41,7 @@ export default {
       let lastName = name.slice(0, name.length - 1).join(" ");
 
       let data = {
+        email: this.email,
         firstName: firstName,
         lastName: lastName,
       };
@@ -53,13 +53,11 @@ export default {
 
 <style>
 .v-app-bar {
-
   background-color: #0c5ebb;
   font-family: "Times New Roman", Times, serif;
   font-size: 26px;
   padding-bottom: 10px;
   border-bottom: 1px solid #b8bec5;
-
 
   /* position: fixed; */
 }

@@ -7,7 +7,7 @@
       <div class="mb-3">
         <div class="mb-3 row">
           <label for="inputPassword" class="col-sm-4 col-form-label"
-            >Mật khẩu cũ</label
+            >Mật khẩu cũ*</label
           >
           <div class="col-sm-8">
             <input type="password" class="form-control" v-model="password" />
@@ -15,7 +15,7 @@
         </div>
         <div class="mb-3 row">
           <label for="inputPassword" class="col-sm-4 col-form-label"
-            >Mật khẩu mới</label
+            >Mật khẩu mới*</label
           >
           <div class="col-sm-8">
             <input type="password" class="form-control" v-model="password" />
@@ -23,7 +23,7 @@
         </div>
         <div class="mb-3 row">
           <label for="inputPassword" class="col-sm-4 col-form-label"
-            >Nhập lại mật khẩu</label
+            >Nhập lại mật khẩu*</label
           >
           <div class="col-sm-8">
             <input type="password" class="form-control" v-model="password" />
@@ -37,14 +37,6 @@
             @click="submit"
             size="large"
             >XÁC NHẬN</v-btn
-          >
-          <v-btn
-            class="btn text-white"
-            type="reset"
-            color="#e44110"
-            @click="submit"
-            size="large"
-            >HỦY</v-btn
           >
         </div>
       </div>
