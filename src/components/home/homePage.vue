@@ -44,7 +44,7 @@
               ></v-img>
             </a>
           </div>
-          <div class="content">
+          <div class="content text-center">
             <a
               href="https://fee.haui.edu.vn/vn"
               title="Truy cập trang Đại học Công nghiệp Hà Nội"
@@ -70,7 +70,7 @@
               ></v-img>
             </a>
           </div>
-          <div class="content">
+          <div class="content text-center">
             <a
               href="https://fee.haui.edu.vn/vn"
               title="Truy cập trang Khoa Điện tử HaUI"
@@ -94,7 +94,7 @@
               ></v-img>
             </a>
           </div>
-          <div class="content">
+          <div class="content text-center">
             <a
               href="https://www.abet.org/"
               title="Truy cập trang ABET "
