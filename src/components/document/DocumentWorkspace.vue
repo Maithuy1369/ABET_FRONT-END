@@ -1,6 +1,7 @@
 <template>
     <div id="mainnn">
         <div class="part22-card card fluid">
+          <div class="title">PHIẾU ĐÁNH GIÁ PI</div>
             <ag-grid-vue
                 style="width: 100%; height: 500px; margin: 0 auto"
                 class="ag-theme-alpine"
@@ -11,9 +12,32 @@
             >
             </ag-grid-vue>
         </div>
-        <v-btn @click="edit" v-if="editable">submit</v-btn>
-        <v-btn @click="exportToPDF">export</v-btn>
+        <div>
+      <v-btn
+        class="btn text-white"
+        type="submit"
+        color="#c96d04"
+        @click="ListPIbySO"
+        size="x-large"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          fill="currentColor"
+          class="bi bi-arrow-left text-white"
+          viewBox="0 0 16 16"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"
+          />
+        </svg>
+        QUAY LẠI</v-btn
+      >
+      <v-btn @click="edit" v-if="editable">GHI NHẬN</v-btn>
     </div>
+  </div>
 </template>
 <script>
 import { documentAPI } from "@/api/document";
@@ -27,6 +51,9 @@ export default {
         AgGridVue,
     },
     methods: {
+      ListPIbySO() {
+      this.$router.push("/document/all-document-by-so/:id");
+    },
         exportToPDF() {
             html2pdf(document.getElementById("mainnn"));
         },
@@ -241,4 +268,12 @@ export default {
     border-width: 2;
     width: -webkit-fill-available;
 }
+  .title {
+  margin: 0 10px 30px;
+  border-bottom: 1px solid #d9d9d9;
+  font-weight: 400;
+  color: #0355b3;
+}
 </style>
+
+
