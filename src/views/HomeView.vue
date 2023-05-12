@@ -16,6 +16,16 @@ export default {
     //     NavBar,
     //     Content,
     // },
+    created() {
+        if (!window.passWaitingRoom && this.includeMenu) {
+            this.$router.push("/waiting-room");
+        }
+    },
+    computed: {
+        includeMenu() {
+            return true;
+        },
+    },
 };
 </script>
 
@@ -31,32 +41,32 @@ export default {
     box-sizing: border-box;
 }
 .part1 {
- width: 100%;
-  position: fixed;
-  top: 0;
-  min-height: 50px;
-  margin-bottom: 5px;
-  z-index: 1;
-  border-bottom-color: #0943b8;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    min-height: 50px;
+    margin-bottom: 5px;
+    z-index: 1;
+    border-bottom-color: #0943b8;
 }
 .part21 {
-  height: 100%;
-  width: 230px;
+    height: 100%;
+    width: 230px;
 
-  box-sizing: border-box;
-  display: block;
+    box-sizing: border-box;
+    display: block;
 
-  position: fixed;
+    position: fixed;
 }
 .part22 {
-  width: 100%;
-  width: -webkit-fill-available; /*Mozilla-based browsers will ignore this. */
-  left: 0;
-  position: relative;
-  margin-left: 230px;
-  height: 100%;
-  box-sizing: border-box;
-  display: block;
+    width: 100%;
+    width: -webkit-fill-available; /*Mozilla-based browsers will ignore this. */
+    left: 0;
+    position: relative;
+    margin-left: 230px;
+    height: 100%;
+    box-sizing: border-box;
+    display: block;
 }
 .v-app-bar {
     height: 100%;

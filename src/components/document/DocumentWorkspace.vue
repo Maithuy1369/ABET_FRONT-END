@@ -1,19 +1,18 @@
 <template>
-
-  <div>
-    <div class="part22-card card fluid">
-      <ag-grid-vue
-        style="width: 100%; height: 500px; margin: 0 auto"
-        class="ag-theme-alpine"
-        :columnDefs="columnDefs"
-        :rowData="rawData"
-        :defaultColDef="defaultColDef"
-        v-if="agReady"
-      >
-      </ag-grid-vue>
+    <div>
+        <div class="part22-card card fluid">
+            <ag-grid-vue
+                style="width: 100%; height: 500px; margin: 0 auto"
+                class="ag-theme-alpine"
+                :columnDefs="columnDefs"
+                :rowData="rawData"
+                :defaultColDef="defaultColDef"
+                v-if="agReady"
+            >
+            </ag-grid-vue>
+        </div>
+        <v-btn @click="edit" v-if="editable">submit</v-btn>
     </div>
-  </div>
-
 </template>
 <script>
 import { documentAPI } from "@/api/document";
@@ -28,14 +27,7 @@ export default {
     methods: {
         edit() {
             let data = [];
-            // for (let i in this.rawData) {
-            //     let d = this.rawData[i];
-            //     let value = JSON.parse(d.value);
-            //     for (let v of Object.keys(value)) {
-            //         value[v] = d[(v + d.feeValueField).replaceAll(".", "")];
-            //     }
-            //     data.push({ ...d, value: JSON.stringify(value) });
-            // }
+
             for (let i in this.detailDocumentOrigin.data) {
                 let dataO = this.detailDocumentOrigin.data[i].detail;
                 for (let d in dataO) {
@@ -46,10 +38,12 @@ export default {
                     for (let v of Object.keys(value)) {
                         let feeValueField = dataO[d].feeValueField;
                         console.log(feeValueField);
-                        value[v] =
-                            rawData[
-                                v + dataO[d].feeValueField.replaceAll(".", "")
-                            ];
+                        let customField = (
+                            v + dataO[d].feeValueField
+                        ).replaceAll(".", "");
+                        value[v] = rawData[customField]
+                            ? rawData[customField]
+                            : value[v];
                     }
                     dataO[d].value = JSON.stringify(value);
                     data.push(dataO[d]);
@@ -62,6 +56,7 @@ export default {
         let id = this.$route.params.id;
         let res = await documentAPI.getDetailDocument(id);
         if (res.status == 200) {
+            let rawData = [];
             this.$set(this, "detailDocumentOrigin", res.data);
             // this.detailDocumentOrigin = res.data;
             this.editable = this.detailDocumentOrigin.assessorId.includes(
@@ -123,18 +118,29 @@ export default {
                         a.detail[i] = { ...b, ...v };
                     });
                 }
-                let rawData = [...this.rawData, ...a.detail];
-                let distinc = [];
-                rawData = rawData.filter((a) => {
-                    if (distinc.indexOf(a.id)) {
-                        return false;
-                    }
-                    distinc.push(a.id);
-                    return true;
-                });
-                this.rawData = rawData;
-                this.rawData = [...this.rawData, ...a.detail];
+                rawData = [...rawData, ...a.detail];
+
+                // this.rawData = [...this.rawData, ...a.detail];
             });
+            let distinc = [];
+            let computedRawData = [];
+            rawData.map((r) => {
+                if (distinc.includes(r.studentId)) {
+                    let index = distinc.indexOf(r.studentId);
+                    for (let a of Object.keys(r)) {
+                        if (
+                            computedRawData[index][a] == "" ||
+                            !computedRawData[index][a]
+                        ) {
+                            computedRawData[index][a] = r[a];
+                        }
+                    }
+                } else {
+                    computedRawData.push(r);
+                    distinc.push(r.studentId);
+                }
+            });
+            this.rawData = computedRawData;
             this.agReady = true;
         }
     },
@@ -196,23 +202,21 @@ export default {
   --ag-header-column-resize-handle-color: orange;
 } */
 .ag-root-wrapper {
-
-  border: none !important;
+    border: none !important;
 }
 .part22-card {
-  position: relative;
-  margin-left: 60px;
-  margin-top: 20px;
-  margin-right: 30px;
-  padding-top: 30px;
-  padding-left: 25px;
-  padding-right: 25px;
-  box-sizing: border-box;
-  display: block;
-  border-top-color: blue;
-  border-top: 3px solid #2980e4;
-  border-width: 2;
-  width: -webkit-fill-available;
-
+    position: relative;
+    margin-left: 60px;
+    margin-top: 20px;
+    margin-right: 30px;
+    padding-top: 30px;
+    padding-left: 25px;
+    padding-right: 25px;
+    box-sizing: border-box;
+    display: block;
+    border-top-color: blue;
+    border-top: 3px solid #2980e4;
+    border-width: 2;
+    width: -webkit-fill-available;
 }
 </style>

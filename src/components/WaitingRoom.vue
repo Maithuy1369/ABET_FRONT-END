@@ -6,6 +6,10 @@ import { userAPI } from "@/api/user";
 import { sODocumentAPI } from "@/api/sODocument";
 export default {
     async created() {
+        let stillAliveRes = await userAPI.testHelthToken();
+        if (stillAliveRes.status == 401) {
+            this.$router.push("/login");
+        }
         this.lastPath = this.$router.history.router.history._startLocation;
         let allUserRes = await userAPI.getAllUserInfo();
 
