@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div id="mainnn">
         <div class="part22-card card fluid">
             <ag-grid-vue
                 style="width: 100%; height: 500px; margin: 0 auto"
@@ -12,6 +12,7 @@
             </ag-grid-vue>
         </div>
         <v-btn @click="edit" v-if="editable">submit</v-btn>
+        <v-btn @click="exportToPDF">export</v-btn>
     </div>
 </template>
 <script>
@@ -20,36 +21,55 @@ import { AgGridVue } from "ag-grid-vue";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
 import "ag-grid-enterprise";
+import html2pdf from "html2pdf.js";
 export default {
     components: {
         AgGridVue,
     },
     methods: {
+        exportToPDF() {
+            html2pdf(document.getElementById("mainnn"));
+        },
         edit() {
-            let data = [];
+            if (this.derivative) {
+                let data = [];
 
-            for (let i in this.detailDocumentOrigin.data) {
-                let dataO = this.detailDocumentOrigin.data[i].detail;
-                for (let d in dataO) {
-                    let rawData = this.rawData.find(
-                        (a) => a.studentId == dataO[d].studentId
-                    );
-                    let value = JSON.parse(dataO[d].value);
-                    for (let v of Object.keys(value)) {
-                        let feeValueField = dataO[d].feeValueField;
-                        console.log(feeValueField);
-                        let customField = (
-                            v + dataO[d].feeValueField
-                        ).replaceAll(".", "");
-                        value[v] = rawData[customField]
-                            ? rawData[customField]
-                            : value[v];
+                for (let i in this.detailDocumentOrigin.data) {
+                    let dataO = this.detailDocumentOrigin.data[i].detail;
+                    for (let d in dataO) {
+                        let rawData = this.rawData.find(
+                            (a) => a.studentId == dataO[d].studentId
+                        );
+                        let value = JSON.parse(dataO[d].value);
+                        for (let v of Object.keys(value)) {
+                            let feeValueField = dataO[d].feeValueField;
+                            console.log(feeValueField);
+                            let customField = (
+                                v + dataO[d].feeValueField
+                            ).replaceAll(".", "");
+                            value[v] = rawData[customField]
+                                ? rawData[customField]
+                                : value[v];
+                        }
+                        dataO[d].value = JSON.stringify(value);
+                        data.push(dataO[d]);
                     }
-                    dataO[d].value = JSON.stringify(value);
-                    data.push(dataO[d]);
                 }
+                documentAPI.editDocument(data);
+            } else {
+                let data = [];
+                let rawData = this.rawData;
+                this.detailDocumentOrigin.data[0].detail.map((a) => {
+                    let rData = rawData.find((r) => r.studentId == a.studentId);
+                    let value = JSON.parse(a.value);
+                    for (let v of Object.keys(value)) {
+                        value[v] = rData[v];
+                    }
+                    a.value = JSON.stringify(value);
+                    data.push(a);
+                });
+                documentAPI.editDocument(data);
             }
-            documentAPI.editDocument(data);
         },
     },
     async created() {
@@ -66,6 +86,7 @@ export default {
             eluvationField.headerName = res.data.evaluateField;
             res.data.data.map((a) => {
                 if (a.field != 0) {
+                    this.derivative = true;
                     eluvationField.children.push({
                         editable: this.editable,
                         headerName: a.field,
@@ -148,6 +169,7 @@ export default {
     watch: {},
     data() {
         return {
+            derivative: false,
             editable: false,
             agReady: false,
             defaultColDef: {
