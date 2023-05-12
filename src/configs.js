@@ -1,5 +1,6 @@
 // import { util } from './plugins/util';
 const host = 'http://localhost:1234'
+export const fileServiceHost = 'http://localhost:1236/'
 var configs = {
     defaultAvatar: '/img/avatar_default.jpg',
     dataTypeIcon: {
