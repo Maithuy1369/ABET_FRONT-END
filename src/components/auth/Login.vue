@@ -115,18 +115,10 @@ export default {
         localStorage.feeUserInfo = JSON.stringify(res.data);
         // this.$router.push("/");
         window.location.href = ".";
-      } else {
-        console.log("unAuthentication");
-      }
-      // Thông báo khi đăng nhập
-      console.log(res);
-      if (this.username === "admin" && this.password === "password") {
-        // Đăng nhập thành công
         this.loginError = false;
-        // Tiến hành đăng nhập...
       } else {
-        // Đăng nhập thất bại
         this.loginError = true;
+        console.log("unAuthentication");
       }
     },
     moveToRegister() {

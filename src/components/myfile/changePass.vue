@@ -1,7 +1,7 @@
 <template>
   <div class="part22-card card fluid">
     <div class="title">
-      <span> THAY ĐỔI MẬT KHẨU</span>
+      <span><strong>THAY ĐỔI MẬT KHẨU </strong> </span>
     </div>
     <div class="password">
       <div class="mb-3">
@@ -13,6 +13,9 @@
             <input type="password" class="form-control" v-model="password" />
           </div>
         </div>
+        <p v-if="loginError" class="error-message text-center">
+          *Sai mật khẩu!
+        </p>
         <div class="mb-3 row">
           <label for="inputPassword" class="col-sm-4 col-form-label"
             >Mật khẩu mới*</label
@@ -33,6 +36,7 @@
             />
           </div>
         </div>
+
         <div class="d-grid gap-2 d-flex justify-content-center">
           <v-btn
             class="btn text-white"
@@ -65,8 +69,10 @@ export default {
             password: this.newpassword,
           });
           console.log(resC);
+          this.loginError = false;
         } else {
           console.log("unAuthentication");
+          this.loginError = true;
         }
       }
     },
@@ -75,6 +81,7 @@ export default {
     return {
       password: "",
       newpassword: "",
+      loginError: false,
     };
   },
 };
