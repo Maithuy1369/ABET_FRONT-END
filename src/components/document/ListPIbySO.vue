@@ -2,7 +2,7 @@
   <div class="part22-card card container-fluid">
     <div>
       <div class="title">
-        <span> DANH SÁCH CÁC MẪU PHIẾU</span>
+        <span> <strong>DANH SÁCH CÁC MẪU PHIẾU </strong></span>
       </div>
       <!-- Them mau phieu -->
       <div class="btn" v-if="isSuperUser">
@@ -58,10 +58,10 @@
             "
           >
             Phiếu đánh giá {{ pi.evaluteField }}
+            <v-btn class="col-md4" @click="() => deleteDocument(pi.id)"
+              >Xóa PI này?</v-btn
+            >
           </div>
-          <v-btn class="col-md4" @click="() => deleteDocument(pi.id)"
-            >Xóa PI này?</v-btn
-          >
         </div>
       </div>
     </div>

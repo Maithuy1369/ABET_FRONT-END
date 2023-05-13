@@ -155,12 +155,14 @@
         >
           Đăng xuất
         </span>
-        <!-- <v-dialog
+
+        <v-dialog
           v-model="dialog"
           width="500px"
           :style="{
             display: dialog ? 'block' : 'none',
           }"
+          style="z-index: 9999"
         >
           <v-card>
             <v-card-title>
@@ -179,7 +181,7 @@
               </v-btn>
             </v-card-actions>
           </v-card>
-        </v-dialog> -->
+        </v-dialog>
 
         <!--]-->
       </div>
@@ -217,6 +219,8 @@ export default {
       this.dialog = true;
     },
     login() {
+      localStorage.removeItem("feeUserInfo");
+      // localStorage.feeUserInfo = JSON.stringify({});
       this.$router.push("/login");
     },
     chartSO() {

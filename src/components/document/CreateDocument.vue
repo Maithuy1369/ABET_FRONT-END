@@ -2,7 +2,7 @@
   <div class="part22-card card">
     <div class="back" data-app>
       <div class="title">
-        <span> TẠO MẪU PHIẾU MỚI</span>
+        <span> <strong>TẠO MẪU PHIẾU MỚI </strong></span>
       </div>
       <div class="task">
         <span>Nhập dữ liệu từ Excel</span>
@@ -21,7 +21,7 @@
             <tr>
               <th>
                 <div class="input-field">
-                  <p>FirstName:</p>
+                  <p>Tên:</p>
                   <v-text-field
                     v-model="firstNameField"
                     type="text"
@@ -31,7 +31,7 @@
               </th>
               <th>
                 <div class="input-field">
-                  <p>LastName:</p>
+                  <p>Họ đệm:</p>
                   <v-text-field
                     v-model="lastNameField"
                     type="text"
@@ -69,9 +69,13 @@
                   ></v-text-field>
                 </div>
               </th>
-              <th>
+            </tr>
+          </table>
+          <table class="mt-2">
+            <tr>
+              <th style="width: 55%">
                 <div class="input-field">
-                  <p>Assessor:</p>
+                  <p>Thành viên:</p>
                   <v-autocomplete
                     v-model="assesorId"
                     :items="allUser"
@@ -88,7 +92,7 @@
                         :input-value="data.selected"
                         close
                         @click="data.select"
-                        @click:close="remove(data.item)"
+                        @click:close="remove(data.item.userName)"
                       >
                         {{ data.item.firstName + " " + data.item.lastName }}
                       </v-chip>
@@ -109,7 +113,7 @@
               </th>
               <th>
                 <div class="input-field">
-                  <p>Assessor:</p>
+                  <p>Trưởng nhóm đánh giá:</p>
                   <v-autocomplete
                     v-model="verifierId"
                     :items="allUser"
@@ -120,7 +124,7 @@
                     item-value="userName"
                   >
                     <template v-slot:selection="data">
-                      <v-chip
+                      <span
                         v-bind="data.attrs"
                         :input-value="data.selected"
                         close
@@ -128,7 +132,7 @@
                         @click:close="remove(data.item)"
                       >
                         {{ data.item.firstName + " " + data.item.lastName }}
-                      </v-chip>
+                      </span>
                     </template>
                     <template v-slot:item="data">
                       <template>
@@ -209,7 +213,7 @@
         >
       </div>
       <ag-grid-vue
-        style="width: 90%; height: 900px; margin: 0 auto"
+        style="width: 90%; height: 600px; margin: 0 auto"
         class="ag-theme-alpine"
         :columnDefs="fetchColumnDefs"
         :rowData="rawData"
@@ -273,6 +277,10 @@ export default {
     };
   },
   methods: {
+    remove(userName) {
+      // console.log(item);
+      this.assesorId.splice(this.assesorId.indexOf(userName), 1);
+    },
     async createDocument() {
       let listStuden = [];
       // let name = this.documentName;
@@ -422,4 +430,8 @@ th {
   display: flex;
   justify-content: space-around;
 }
+/* .input-field >>> .v-select__slot {
+  height: 120px;
+  overflow: auto;
+} */
 </style>

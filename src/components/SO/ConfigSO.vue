@@ -2,7 +2,7 @@
   <div class="part22-card card container-fluid">
     <div data-app>
       <div class="title">
-        <span> DANH SÁCH CÁC SO</span>
+        <span><strong>DANH SÁCH CÁC SO</strong> </span>
       </div>
       <div class="title-1" style="width: 50%">
         <v-autocomplete
@@ -32,6 +32,7 @@ import dayjs from "dayjs";
 export default {
   methods: {
     async createSO() {
+      alert("Đã gửi xác nhận!");
       if (this.name == null || this.description == "") {
         return;
       }
