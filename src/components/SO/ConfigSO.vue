@@ -11,7 +11,7 @@
           :items="soNameOptions"
         >
         </v-autocomplete>
-        <!-- <v-textarea label="Mô tả" v-model="description"></v-textarea> -->
+         <v-textarea label="Mô tả" v-model="description"></v-textarea> 
       </div>
       <div classId="d-grid justify-space-center ">
         <v-btn
