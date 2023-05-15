@@ -32,11 +32,9 @@ import dayjs from "dayjs";
 export default {
   methods: {
     async createSO() {
-      alert("Đã gửi xác nhận!");
       if (this.name == null || this.description == "") {
         return;
       }
-      // alert("Đã gửi xác nhận!");
       let currentYear = dayjs().year();
       let a = sODocumentAPI.createSODocument(
         this.name,
@@ -44,6 +42,8 @@ export default {
         currentYear
       );
       console.log(a);
+      alert("Đã gửi xác nhận!");
+      this.$router.push("/waiting-room");
     },
   },
   data() {
