@@ -5,61 +5,93 @@
         <span> <strong>DANH SÁCH CÁC MẪU PHIẾU </strong></span>
       </div>
       <!-- Them mau phieu -->
-      <div class="btn" v-if="isSuperUser">
+      <div class="btn text-xs-center" v-if="isSuperUser">
         <v-btn
           class="btn text-white"
-          type="submit"
           color="#2980e4"
           @click="toConfigDocument"
           size="x-large"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            fill="currentColor"
-            class="bi bi-plus"
-            viewBox="0 0 16 16"
-          >
-            <path
-              d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"
-            />
-          </svg>
-          Thêm mẫu phiếu</v-btn
+          <v-icon medium dark left>mdi-plus</v-icon>Thêm mẫu phiếu</v-btn
         >
-        <!-- xos SO -->
-        <v-btn @click="deleteSODocument" color="#d41111" class="btn text-white"
-          ><svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            fill="currentColor"
-            class="bi bi-x-circle"
-            viewBox="0 -2 20 20"
-          >
-            <path
-              d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"
-            />
-            <path
-              d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"
-            />
-          </svg>
+        <!-- XOA SO -->
+        <v-btn
+          @click="showDialog"
+          color="#d41111"
+          class="btn text-white"
+          size="x-large"
+        >
+          <v-icon medium dark left>mdi-close-box-outline</v-icon>
           Xóa SO này?</v-btn
         >
+        <v-dialog
+          v-model="dialog"
+          width="500px"
+          :style="{
+            display: dialog ? 'block' : 'none',
+          }"
+          style="z-index: 9999"
+          color="#e0f8d0"
+        >
+          <v-card>
+            <v-card-title>
+              <span class="text-h5">XÁC NHẬN XÓA SO?</span>
+            </v-card-title>
+            <v-card-text>
+              <span class="text-h5 text-black"
+                >Bạn có chắc chắn muốn xóa SO này?</span
+              >
+            </v-card-text>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn
+                class="btn text-white"
+                color="#03741b"
+                variant="elevated"
+                @click="deleteSODocument"
+              >
+                Xác nhận
+              </v-btn>
+              <v-btn
+                class="btn text-white"
+                color="#cf0d0d"
+                variant="elevated"
+                @click="dialog = false"
+              >
+                Thoát
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+        <!--  -->
       </div>
       <!-- Danh sach cac phieu PI -->
-      <div class="col-md4">
+      <div>
         <div v-for="pi in allPIBySO" :key="pi.id" style="cursor: pointer">
-          <div
-            @click="
-              () => {
-                toDetailDocument(pi.id);
-              }
-            "
-          >
+          <div class="phieu">
             Phiếu đánh giá {{ pi.evaluteField }}
-            <v-btn class="col-md4" @click="() => deleteDocument(pi.id)"
-              >Xóa PI này?</v-btn
+
+            <!-- XOA PI -->
+            <v-icon
+              class="btn1"
+              large
+              color="#cf0d0d"
+              style="margin-left: 40px"
+              @click="() => deleteDocument(pi.id)"
+              >mdi-trash-can-outline</v-icon
+            >
+            <!-- CHINH SUA PI -->
+            <v-icon
+              class="btn1"
+              color="#000000"
+              style="margin-left: 40px"
+              large
+              @click="
+                () => {
+                  toDetailDocument(pi.id);
+                }
+              "
+              >mdi-clipboard-edit-outline</v-icon
             >
           </div>
         </div>
@@ -82,6 +114,7 @@ export default {
   data() {
     return {
       allPIBySO: [],
+      dialog: false,
     };
   },
   async created() {
@@ -94,11 +127,13 @@ export default {
   },
   methods: {
     deleteDocument(id) {
+      this.$router.push("/waiting-room");
       documentAPI.deleteDocument(id);
     },
     deleteSODocument() {
       let id = this.$route.params.id;
       sODocumentAPI.deleteDocument(id);
+      this.$router.push("/waiting-room");
     },
     toDetailDocument(id) {
       this.$router.push("/document/" + id + "/workspace");
@@ -107,6 +142,9 @@ export default {
       this.$router.push(
         "/document/" + this.$route.params.id + "/create-document"
       );
+    },
+    showDialog() {
+      this.dialog = true;
     },
   },
 };
@@ -135,21 +173,30 @@ export default {
   font-family: "Times New Roman", Times, serif;
   font-size: 20px;
   font-weight: 400;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   color: #0355b3;
 }
 .btn {
   font-family: "Times New Roman", Times, serif;
-  font-size: 20px;
+  font-size: 25px;
   padding: 15px;
   margin-right: 20px;
 }
 .bi {
   color: white;
 }
+.phieu .btn1:hover {
+  color: #0355b3;
+}
 .btn-row {
   font-family: "Times New Roman", Times, serif;
   font-size: 20px;
   padding: 30px;
+}
+.phieu {
+  box-sizing: border-box;
+  display: block;
+  border-width: 2;
+  margin-left: 20px;
 }
 </style>

@@ -166,17 +166,29 @@
         >
           <v-card>
             <v-card-title>
-              <span class="text-h5">Xác nhận thoát ?</span>
+              <span class="text-h5">XÁC NHẬN ĐĂNG XUẤT ?</span>
             </v-card-title>
             <v-card-text>
-              Bạn đã chắc chắn muốn rời khỏi hệ thống điện tử
+              <span class="text-h5 text-black"
+                >Bạn đã chắc chắn muốn rời khỏi hệ thống điện tử?</span
+              >
             </v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="black" variant="elevated" @click="login">
+              <v-btn
+                class="btn text-white"
+                color="#03741b"
+                variant="elevated"
+                @click="login"
+              >
                 Xác nhận
               </v-btn>
-              <v-btn color="red" variant="elevated" @click="dialog = false">
+              <v-btn
+                class="btn text-white"
+                color="#cf0d0d"
+                variant="elevated"
+                @click="dialog = false"
+              >
                 Thoát
               </v-btn>
             </v-card-actions>
@@ -273,12 +285,6 @@ export default {
   font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 48;
   color: black;
 }
-/* .button {
-  background-color: #756332;
-}
-.button:hover {
-  background-color: #f0ed4c;
-} */
 .bi {
   margin-right: 5px;
   width: 30px;

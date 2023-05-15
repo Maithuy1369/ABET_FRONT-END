@@ -167,49 +167,29 @@
           </v-autocomplete>
         </div>
       </div>
-      <div style="display: flex; justify-content: start; margin: 30px">
+      <div
+        style="
+          display: flex;
+          justify-content: start;
+          margin: 30px;
+          font-size: 25px;
+        "
+      >
         <v-btn
           class="btn text-white"
-          type="submit"
           color="#c96d04"
           @click="ListPIbySO"
           size="x-large"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            fill="currentColor"
-            class="bi bi-arrow-left text-white"
-            viewBox="0 0 16 16"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"
-            />
-          </svg>
-          QUAY LẠI</v-btn
-        >
+          <v-icon dark left>arrow_back</v-icon>QUAY LẠI
+        </v-btn>
         <v-btn
           class="btn text-white"
-          type="submit"
           color="#2980e4"
           @click="createDocument"
           size="x-large"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            fill="currentColor"
-            class="bi bi-plus text-white"
-            viewBox="0 0 16 16"
-          >
-            <path
-              d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"
-            />
-          </svg>
-          LƯU LẠI</v-btn
+          <v-icon dark left>mdi-plus</v-icon>LƯU LẠI</v-btn
         >
       </div>
       <ag-grid-vue
@@ -379,6 +359,8 @@ export default {
   border-bottom: 1px solid #d9d9d9;
   font-weight: 400;
   color: #0355b3;
+}
+.btn {
 }
 .task {
   margin-bottom: 20px;
