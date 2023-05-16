@@ -1,5 +1,5 @@
 // import { util } from './plugins/util';
- const host = 'http://3.25.117.166:1234'
+ const host = 'http://localhost:1234'
  export const fileServiceHost = 'http://3.25.117.166:1236/'
 // const host = 'http://localhost:1234'
 // export const fileServiceHost = 'http://localhost:1236/'

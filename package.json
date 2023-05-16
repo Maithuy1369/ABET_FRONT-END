@@ -9,6 +9,8 @@
   },
   "dependencies": {
     "@syncfusion/ej2-vue-schedule": "^21.1.35",
+    "@ag-grid-community/core":"25.1.0",
+    "ag-grid-autocomplete-editor": "3.0.0",
     "ag-grid-community": "^29.0.0",
     "ag-grid-enterprise": "^29.0.0",
     "ag-grid-vue": "^29.0.0",

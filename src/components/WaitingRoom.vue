@@ -6,11 +6,12 @@ import { userAPI } from "@/api/user";
 import { sODocumentAPI } from "@/api/sODocument";
 export default {
     async created() {
-        let stillAliveRes = await userAPI.testHelthToken();
-        if (stillAliveRes.status == 401) {
-            this.$router.push("/login");
-        }
         this.lastPath = this.$router.history.router.history._startLocation;
+        let stillAliveRes = await userAPI.testHelthToken();
+        if (stillAliveRes.message == "invalid or expired jwt") {
+            window.location.href = "/login";
+        }
+
         let allUserRes = await userAPI.getAllUserInfo();
 
         if (allUserRes.status == 200) {
@@ -34,6 +35,9 @@ export default {
     },
     methods: {
         directToNextPage() {
+            if (this.lastPath == "/waiting-room") {
+                this.lastPath = "/";
+            }
             this.$router.push(this.lastPath);
         },
         async getAllUser() {
