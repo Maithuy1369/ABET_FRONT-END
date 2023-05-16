@@ -15,29 +15,23 @@
       >
       </ag-grid-vue>
     </div>
-    <div>
+    <!-- NUT NHAN -->
+    <div
+      style="
+        display: flex;
+        justify-content: start;
+        margin: 30px;
+        font-size: 25px;
+      "
+    >
       <v-btn
         class="btn text-white"
-        type="submit"
         color="#c96d04"
         @click="ListPIbySO"
         size="x-large"
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="16"
-          height="16"
-          fill="currentColor"
-          class="bi bi-arrow-left text-white"
-          viewBox="0 0 16 16"
-        >
-          <path
-            fill-rule="evenodd"
-            d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"
-          />
-        </svg>
-        QUAY LẠI</v-btn
-      >
+        <v-icon dark left>arrow_back</v-icon>QUAY LẠI
+      </v-btn>
       <v-btn
         @click="edit"
         v-if="editable"
@@ -46,6 +40,7 @@
         >GHI NHẬN</v-btn
       >
     </div>
+    <!--  -->
   </div>
 </template>
 <script>
@@ -209,24 +204,22 @@ export default {
       },
       columnDefs: [
         {
-          headerName: "Họ tên",
+          field: "studentId",
+          headerName: "MSV",
+        },
+        {
+          headerName: "Họ và tên",
           children: [
             {
-              field: "firstName",
-              headerName: "Họ đệm",
+              field: "lastName",
+              headerName: "Họ đệm",
             },
             {
-              field: "lastName",
+              field: "firstName",
               headerName: "Tên",
             },
           ],
         },
-
-        {
-          field: "studentId",
-          headerName: "MSV",
-        },
-
         {
           field: "classId",
           headerName: "Lớp",

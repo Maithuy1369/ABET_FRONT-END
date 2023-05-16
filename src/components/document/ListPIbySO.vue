@@ -58,7 +58,7 @@
                 variant="elevated"
                 @click="dialog = false"
               >
-                Thoát
+                Hủy
               </v-btn>
             </v-card-actions>
           </v-card>
@@ -67,19 +67,10 @@
       </div>
       <!-- Danh sach cac phieu PI -->
       <div>
-        <div v-for="pi in allPIBySO" :key="pi.id" style="cursor: pointer">
+        <div v-for="pi in allPIBySO" :key="pi.id">
           <div class="phieu">
             Phiếu đánh giá {{ pi.evaluteField }}
 
-            <!-- XOA PI -->
-            <v-icon
-              class="btn1"
-              large
-              color="#cf0d0d"
-              style="margin-left: 40px"
-              @click="() => deleteDocument(pi.id)"
-              >mdi-trash-can-outline</v-icon
-            >
             <!-- CHINH SUA PI -->
             <v-icon
               class="btn1"
@@ -93,6 +84,16 @@
               "
               >mdi-clipboard-edit-outline</v-icon
             >
+            <!-- XOA PI -->
+
+            <v-icon
+              class="btn1 btn1-hover"
+              large
+              color="#cf0d0d"
+              style="margin-left: 40px"
+              @click="() => deleteDocument(pi.id)"
+              >mdi-trash-can-outline
+            </v-icon>
           </div>
         </div>
       </div>
@@ -185,9 +186,7 @@ export default {
 .bi {
   color: white;
 }
-.phieu .btn1:hover {
-  color: #0355b3;
-}
+
 .btn-row {
   font-family: "Times New Roman", Times, serif;
   font-size: 20px;
@@ -198,5 +197,8 @@ export default {
   display: block;
   border-width: 2;
   margin-left: 20px;
+}
+.phieu:hover {
+  color: #0355b3;
 }
 </style>

@@ -164,18 +164,16 @@ export default {
           res.data.files; // binary representation of the file
           res.status; // HTTP status
           location.reload();
-          // console.log(this.$refs);
-          // this.$set(this, "userAvatarUrl", "/img/user.ed310565.jpg");
-          // setTimeout(() => {
-          //     this.onUpload = false;
-          //     this.$set(
-          //         this,
-          //         "userAvatarUrl",
-          //         this.fileServiceHost +
-          //             "readFile/user_avatar_" +
-          //             this.userId
-          //     );
-          // }, 1000);
+          console.log(this.$refs);
+          this.$set(this, "userAvatarUrl", "/img/user.ed310565.jpg");
+          setTimeout(() => {
+            this.onUpload = false;
+            this.$set(
+              this,
+              "userAvatarUrl",
+              this.fileServiceHost + "readFile/user_avatar_" + this.userId
+            );
+          }, 1000);
         });
     },
     // submitFile() {
@@ -200,6 +198,7 @@ export default {
       };
       userAPI.updateUserInfo(data);
       alert("Gửi yêu cầu cập nhật thành công!");
+      this.$router.push("/waiting-room");
     },
   },
 };
