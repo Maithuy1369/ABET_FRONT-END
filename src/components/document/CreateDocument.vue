@@ -193,7 +193,7 @@
         >
       </div>
       <ag-grid-vue
-        style="width: 90%; height: 600px; margin: 0 auto"
+        style="width: 90%; height: 450px; margin: 0 auto"
         class="ag-theme-alpine"
         :columnDefs="fetchColumnDefs"
         :rowData="rawData"

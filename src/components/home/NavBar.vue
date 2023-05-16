@@ -189,7 +189,7 @@
                 variant="elevated"
                 @click="dialog = false"
               >
-                Thoát
+                Hủy
               </v-btn>
             </v-card-actions>
           </v-card>
