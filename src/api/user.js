@@ -19,6 +19,23 @@ export const userAPI = {
         return feeAjax(options)
         // return coreAPI.post('login', data)
     },
+    register(userName, password, firstName, email) {
+        let data = {
+            userName: userName,
+            password: password,
+            firstName:firstName,
+            email:email
+        }
+        let options = {
+            method: 'POST',
+            crossDomain: true,
+            data: data,
+            url: appConfigs.getAPIUrl(appConfigs.apiDomain.auth) + 'create',
+            headers: {}
+        }
+        return feeAjax(options)
+        // return coreAPI.post('login', data)
+    },
     testHelthToken() {
         let feeUserInfo = JSON.parse(localStorage.getItem('feeUserInfo'))
         let options = {
