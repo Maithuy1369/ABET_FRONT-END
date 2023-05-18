@@ -12,6 +12,7 @@ import profileVue from '@/components/myfile/profile.vue'
 import changePassVue from '@/components/myfile/changePass.vue'
 import chartSOVue from '@/components/SO/chartSO.vue'
 import homePage from '@/components/home/homePage.vue'
+import groupProfileVue  from '@/components/myfile/group_profile.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -44,6 +45,11 @@ const routes = [
     path: '/profile',
     name: 'profile',
     component: profileVue
+  },
+  {
+    path: '/group_profile',
+    name: 'group_profile',
+    component: groupProfileVue
   },
   {
     path: '/changePass',
