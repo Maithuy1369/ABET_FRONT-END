@@ -229,11 +229,13 @@
                 >
             </div>
             <ag-grid-vue
+                @grid-ready="onGridReady"
                 rowSelection="multiple"
                 style="width: 90%; height: 450px; margin: 0 auto"
                 class="ag-theme-alpine"
                 :columnDefs="fetchColumnDefs"
                 :rowData="rawData"
+                :suppressScrollOnNewData="false"
             >
             </ag-grid-vue>
         </div>
@@ -244,33 +246,15 @@
 import { read, utils } from "xlsx";
 import { AgGridVue } from "ag-grid-vue";
 import { documentAPI } from "@/api/document.js";
-
-// import { AutocompleteSelectCellEditor } from "ag-grid-autocomplete-editor";
+// import { AutoCompleteComponent } from './shared/auto-complete.component';
 import { sODocumentAPI } from "@/api/sODocument.js";
-// const selectData = [
-//     { value: 0, label: "this" },
-//     { value: 1, label: "is" },
-//     { value: 2, label: "sparta" },
-//     { value: 3, label: "yolo" },
-//     { value: 4, label: "yoloooooo" },
-//     { value: 5, label: "yola" },
-//     { value: 6, label: "yoli" },
-//     { value: 7, label: "yolu" },
-//     { value: 8, label: "yolp" },
-//     { value: 9, label: "yolop" },
-//     { value: 10, label: "yolpo" },
-//     { value: 11, label: "yolui" },
-//     { value: 12, label: "yolqw" },
-//     { value: 13, label: "yolxz" },
-//     { value: 14, label: "yolcv" },
-//     { value: 15, label: "yolbn" },
-// ];
+
 export default {
     async created() {
         this.allUser = this.$store.state.user.users;
+        this.allUser.map((a) => this.allUserId.push(a.id));
         let id = this.$route.params.id;
         let res = await sODocumentAPI.getDetailSODocument(id);
-        console.log(res);
         this.detailSODocument = res.data;
         let soField =
             this.detailSODocument.name[this.detailSODocument.name.length - 1];
@@ -285,6 +269,8 @@ export default {
     },
     data() {
         return {
+            gridApi: null,
+            allUserId: [],
             allPIField: [],
             evaluateField: [],
             detailSODocument: {},
@@ -315,6 +301,14 @@ export default {
         };
     },
     methods: {
+        onGridReady(params) {
+            this.gridApi = params.api;
+            this.gridColumnApi = params.columnApi;
+        },
+        lookupValue(mappings, index) {
+            let user = mappings.find((a) => a.id == index);
+            return user.firstName + " " + user.lastName;
+        },
         valueFormatter(params) {
             if (params.value) {
                 return params.value.label || params.value.value || params.value;
@@ -322,7 +316,6 @@ export default {
             return "";
         },
         remove(userName) {
-            // console.log(item);
             this.assesorId.splice(this.assesorId.indexOf(userName), 1);
         },
         async createDocument() {
@@ -358,7 +351,7 @@ export default {
             let file = await e.arrayBuffer();
             const wb = read(file);
             const data = utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]]);
-            console.log(data);
+
             this.rawData = data;
             this.translateRawData();
         },
@@ -367,10 +360,7 @@ export default {
             let columnDefs = [];
             let headerName = [];
             this.rawData.map((e) => {
-                console.log(Object.keys(e));
                 headerName = [...new Set(headerName.concat(Object.keys(e)))];
-                // concat(result, Object.keys(e))
-                console.log(headerName);
             });
             headerName.map((field) => {
                 columnDefs.push({
@@ -379,35 +369,36 @@ export default {
                 });
             });
             columnDefs.unshift({
-                headerName: "City",
-                field: "cityObject",
+                field: "assessorId",
+                headerName: "Người đánh giá",
                 editable: true,
-                cellEditor: "autoComplete",
+                cellEditor: "agRichSelectCellEditor",
+                cellEditorPopup: true,
                 cellEditorParams: {
-                    propertyRendered: "city",
-                    returnObject: true,
-                    rowData: [
-                        { id: 1, city: "Paris", country: "France" },
-                        { id: 2, city: "London", country: "United Kingdom" },
-                        { id: 3, city: "Berlin", country: "Germany" },
-                        { id: 4, city: "Madrid", country: "Spain" },
-                        { id: 5, city: "Rome", country: "Italy" },
-                        { id: 6, city: "Copenhagen", country: "Denmark" },
-                        { id: 7, city: "Brussels", country: "Belgium" },
-                        {
-                            id: 8,
-                            city: "Amsterdam",
-                            country: "The Netherlands",
-                        },
-                    ],
-                    columnDefs: [
-                        { headerName: "City", field: "city" },
-                        { headerName: "Country", field: "country" },
-                    ],
+                    values: this.allUserId,
+                    cellRenderer: "ColourCellRenderer",
+                },
+                onCellValueChanged: (param) => {
+                    let newValue = param.newValue;
+                    let allRowSelected = this.gridApi.getSelectedRows();
+                    for (let r of allRowSelected) {
+                        if (r.assesorId != newValue) {
+                            this.$set(r, "assesorId", newValue);
+                            this.rawData[3].assessorId = newValue;
+                            r.assessorId = newValue;
+                        }
+                    }
+                    this.rawData = JSON.parse(JSON.stringify(this.rawData));
+                    // this.gridApi.refreshServerSide();
+
+                    // settimeout(()=>this.)
                 },
                 valueFormatter: (params) => {
-                    if (params.value) return params.value.city;
-                    return "";
+                    if (params.value) {
+                        return this.lookupValue(this.allUser, params.value);
+                    } else {
+                        return "";
+                    }
                 },
             });
             this.fetchColumnDefs = columnDefs;
