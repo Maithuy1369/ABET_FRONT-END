@@ -64,6 +64,17 @@
           </div>
         </section>
       </div>
+      <!-- QUAN LY THANH VIEN -->
+      <div class="group1 mt-2">
+        <v-icon class="bi text-black">mdi-account-group-outline</v-icon>
+        <span
+          class="material-symbols-outlined"
+          @click="group_profile"
+          type="button"
+        >
+          Quản lý thành viên
+        </span>
+      </div>
       <!-- SO -->
       <div class="group mt-2">
         <section class="VPSidebarGroup text-white">
@@ -220,6 +231,9 @@ export default {
     },
     allDocumentBySO(id) {
       this.$router.push("/document/all-document-by-so/" + id);
+    },
+    group_profile() {
+      this.$router.push("/group_profile");
     },
     showprofile() {
       this.$router.push("/profile");
