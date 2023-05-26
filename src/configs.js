@@ -1,5 +1,5 @@
 // import { util } from './plugins/util';
- const host = 'http://localhost:1234'
+ const host = 'http://api.xn--khoa-in-t-ugb1874fena.vn/'
  export const fileServiceHost = 'http://localhost:1236/'
 // const host = 'http://localhost:1234'
 // export const fileServiceHost = 'http://localhost:1236/'
