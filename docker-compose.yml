@@ -1,0 +1,27 @@
+version: '3.8'
+services:
+  node-app:
+    image: node:14
+    restart: always
+    volumes:
+      - .:/usr/src/service/
+      - node_modules:/usr/src/service/node_modules
+    working_dir: /usr/src/service/
+    env_file:
+      - .env
+    ports:
+      - 8080:8080
+    command: bash -c "npm i && npm run serve"
+
+  build:
+    extends:
+      service: node-app
+    command: npm run serve
+    profiles:
+      - donotstart
+volumes:
+  node_modules:
+
+networks:
+  backend:
+    name: frontend
