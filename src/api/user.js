@@ -1,94 +1,92 @@
 // import API from './api'
-import { appConfigs } from './../configs'
-import { feeAjax } from './feeAjax'
+import { appConfigs } from "./../configs";
+import { feeAjax } from "./feeAjax";
 
 // const coreAPI = new API(appConfigs.getAPIUrl(appConfigs.apiDomain.auth))
 export const userAPI = {
     login(userName, password) {
         let data = {
             userName: userName,
-            password: password
-        }
+            password: password,
+        };
         let options = {
-            method: 'POST',
+            method: "POST",
             crossDomain: true,
             data: data,
-            url: appConfigs.getAPIUrl(appConfigs.apiDomain.auth) + 'login',
-            headers: {}
-        }
-        return feeAjax(options)
+            url: appConfigs.getAPIUrl(appConfigs.apiDomain.auth) + "login",
+            headers: {},
+        };
+        return feeAjax(options);
         // return coreAPI.post('login', data)
     },
     register(userName, password, firstName, email) {
         let data = {
             userName: userName,
             password: password,
-            firstName:firstName,
-            email:email
-        }
+            firstName: firstName,
+            email: email,
+        };
         let options = {
-            method: 'POST',
+            method: "POST",
             crossDomain: true,
             data: data,
-            url: appConfigs.getAPIUrl(appConfigs.apiDomain.auth) + 'create',
-            headers: {}
-        }
-        return feeAjax(options)
+            url: appConfigs.getAPIUrl(appConfigs.apiDomain.auth) + "create",
+            headers: {},
+        };
+        return feeAjax(options);
         // return coreAPI.post('login', data)
     },
     testHelthToken() {
-        let feeUserInfo = JSON.parse(localStorage.getItem('feeUserInfo'))
+        let feeUserInfo = JSON.parse(localStorage.getItem("feeUserInfo"));
         let options = {
-            method: 'GET',
+            method: "GET",
             crossDomain: true,
-            data:{},
-            url: appConfigs.getAPIUrl(appConfigs.apiDomain.auth) + 'testJWT',
+            data: {},
+            url: appConfigs.getAPIUrl(appConfigs.apiDomain.auth) + "testJWT",
             headers: {
-                authorization: 'Bearer '+ feeUserInfo.token
-            }
-        }
-        return feeAjax(options)
+                authorization: "Bearer " + feeUserInfo.token,
+            },
+        };
+        return feeAjax(options);
     },
     getAllUserInfo() {
         let options = {
-            method: 'GET',
+            method: "GET",
             crossDomain: true,
             data: {
-                id:"all"
+                id: "all",
             },
-            url: appConfigs.getAPIUrl(appConfigs.apiDomain.auth) + 'get-detail',
-            headers: {}
-        }
-        return feeAjax(options)
+            url: appConfigs.getAPIUrl(appConfigs.apiDomain.auth) + "get-detail",
+            headers: {},
+        };
+        return feeAjax(options);
     },
-    updateUserInfo(data){
-        let feeUserInfo = JSON.parse(localStorage.getItem('feeUserInfo'))
+    updateUserInfo(data) {
+        let feeUserInfo = JSON.parse(localStorage.getItem("feeUserInfo"));
         let options = {
-            method: 'POST',
+            method: "POST",
             crossDomain: true,
             data: data,
-            
-            url: appConfigs.getAPIUrl(appConfigs.apiDomain.auth) + 'update',
+
+            url: appConfigs.getAPIUrl(appConfigs.apiDomain.auth) + "update",
             headers: {
-                authorization: 'Bearer '+ feeUserInfo.token
-            }
-        }
-        return feeAjax(options)
+                authorization: "Bearer " + feeUserInfo.token,
+            },
+        };
+        return feeAjax(options);
     },
-    resetPassword(userName){
-        let feeUserInfo = JSON.parse(localStorage.getItem('feeUserInfo'))
+    resetPassword(userName) {
         let options = {
-            method: 'POST',
+            method: "POST",
             crossDomain: true,
             data: {
-                userName:userName
+                userName: userName,
             },
-            
-            url: appConfigs.getAPIUrl(appConfigs.apiDomain.auth) + 'reset-password',
-            headers: {
-                authorization: 'Bearer '+ feeUserInfo.token
-            }
-        }
-        return feeAjax(options)
-    }
-}
+
+            url:
+                appConfigs.getAPIUrl(appConfigs.apiDomain.auth) +
+                "reset-password",
+        };
+        return feeAjax(options);
+    },
+};
