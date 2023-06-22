@@ -79,6 +79,7 @@ export const userAPI = {
         let options = {
             method: "POST",
             crossDomain: true,
+            headers: {},
             data: {
                 userName: userName,
             },
